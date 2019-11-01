@@ -4,7 +4,7 @@
 //#define MIPS_sys_hpp
 
 class MIPS_sys{
-  public://after testing change to private
+  public://after testing change all member variables to private
     memory null = memory(0,0);
     memory instruction_mem = memory(0x10000000, 0x01000000);
     memory data_mem = memory(0x20000000, 0x04000000);
