@@ -406,7 +406,7 @@ void MIPS_sys::bne(const uint32_t &s, const uint32_t &t, const int &offset){
 
 void MIPS_sys::j(const uint32_t &offset){
   int top_4_bits =(instruction_mem.data[pc + 4].address + 0x00000000) & 0xF0000000;
-  int bttm_28_bits = offset << 2;
+  int bttm_28_bits = (offset & 0x03FFFFFF) << 2;
   //delay slot
   pc += 4;
   //run(next instruction)
