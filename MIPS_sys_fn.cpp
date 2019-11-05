@@ -47,17 +47,17 @@ void MIPS_sys::ld_inst(const char* filename){
 
 void MIPS_sys::intruction_look_up(const instruction &instr){
   switch(instr.instr_no){
-    case 1: add();
+    case 1: add(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
-    case 2: addi();
+    case 2: addi(const int32_t &s, const int32_t &t, const uint32_t &i);
       break;
-    case 3: addiu();
+    case 3: addiu(const int32_t &s, const int32_t &t, const uint32_t &i);
       break;
-    case 4: addu();
+    case 4: addu(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
-    case 5: and();
+    case 5: and(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
-    case 6: andi();
+    case 6: andi(const int32_t &s, const int32_t &t, const uint32_t &i);
       break;
     case 7: beq();
       break;
@@ -75,9 +75,9 @@ void MIPS_sys::intruction_look_up(const instruction &instr){
       break;
     case 14: bne();
       break;
-    case 15: div();
+    case 15: div(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
-    case 16: divu();
+    case 16: divu(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
     case 17: j();
       break;
@@ -103,55 +103,55 @@ void MIPS_sys::intruction_look_up(const instruction &instr){
       break;
     case 28: lwr();
       break;
-    case 29: mfhi();
+    case 29: mfhi(const int32_t &d);
       break;
-    case 30: mflo();
+    case 30: mflo(const int32_t &d);
       break;
-    case 31: mthi();
+    case 31: mthi(const int32_t &s);
       break;
-    case 32: mtlo();
+    case 32: mtlo(const int32_t &s);
       break;
-    case 33: mult();
+    case 33: mult(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
-    case 34: multu();
+    case 34: multu(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
-    case 35: or();
+    case 35: or(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
-    case 36: ori();
+    case 36: ori(const int32_t &s, const int32_t &t, const uint32_t &i);
       break;
     case 37: sb();
       break;
     case 38: sh();
       break;
-    case 39: sll();
+    case 39: sll(const int32_t &t, const int32_t &d, const uint32_t &shamt);
       break;
-    case 40: sllv();
+    case 40: sllv(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
-    case 41: slt();
+    case 41: slt(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
-    case 42: slti();
+    case 42: slti(const int32_t &s, const int32_t &t, const uint32_t &i);
       break;
-    case 43: sltiu();
+    case 43: sltiu(const int32_t &s, const int32_t &t, const uint32_t &i);
       break;
-    case 44: sltu();
+    case 44: sltu(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
-    case 45: sra();
+    case 45: sra(const int32_t &t, const int32_t &d, const uint32_t &shamt);
       break;
-    case 46: srav();
+    case 46: srav(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
-    case 47: srl();
+    case 47: srl(const int32_t &t, const int32_t &d, const uint32_t &shamt);
       break;
-    case 48: srlv();
+    case 48: srlv(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
-    case 49: sub();
+    case 49: sub(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
-    case 50: subu();
+    case 50: subu(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
     case 51: sw();
       break;
-    case 52: xor();
+    case 52: xor(const int32_t &s, const int32_t &t, const int32_t &d);
       break;
-    case 53: xori();
+    case 53: xori(const int32_t &s, const int32_t &t, const uint32_t &i);
       break;
   }
 }
@@ -169,37 +169,37 @@ void MIPS_sys::intruction_look_up(const instruction &instr){
 // to find overlfow, if the sgned bit of result
 
 
-void MIPS_sys::add(){
+void MIPS_sys::add(const int32_t &s, const int32_t &t, const int32_t &d){
   int32_t x1, x2;
   x1 = registers[t];
   x2 = registers[s];
   registers[d] = x1 + x2;
 }
 
-void MIPS_sys::addi(const uint32_t i){
+void MIPS_sys::addi(const int32_t &s, const int32_t &t, const uint32_t i){
   int32_t x1, x2;
   x1 = registers[s];
   x2 = i;
   registers[t] = x1 + i;
 }
 
-void MIPS_sys::addiu(const uint32_t i){
+void MIPS_sys::addiu(const int32_t &s, const int32_t &t, const uint32_t i){
   registers[t] = registers[s] + x1;
 }
 
-void MIPS_sys::addu(){
+void MIPS_sys::addu(const int32_t &s, const int32_t &t, const int32_t &d){
   registers[d] = registers[t] + registers[s];
 }
 
-void MIPS_sys::and(){
+void MIPS_sys::and(const int32_t &s, const int32_t &t, const int32_t &d){
   registers[d] = registers[t] & registers[s];
 }
 
-void MIPS_sys::andi(uconst int32_t i){
+void MIPS_sys::andi(const int32_t &s,const int32_t &t, uconst int32_t i){
   registers[t] = registers[s] & i;
 }
 
-void MIPS_sys::div(){
+void MIPS_sys::div(const int32_t &s, const int32_t &t, const int32_t &d){
   int32_t quotient, remainder;
   int32_t x1, x2;
   x1 = registers[t];
@@ -210,7 +210,7 @@ void MIPS_sys::div(){
   registers[hi] = remainder;
 }
 
-void MIPS_sys::divu(){
+void MIPS_sys::divu(const int32_t &s, const int32_t &t, const int32_t &d){
   uint32_t quotient, remainder;
   quotient = floor(registers[t]/registers[s]);
   remainder = registers[t] - (registers[s] * quotient);
@@ -218,23 +218,23 @@ void MIPS_sys::divu(){
   registers[hi] = remainder;
 }
 
-void MIPS_sys::mfhi(){
+void MIPS_sys::mfhi(const int32_t &d){
   registers[d] = registers[hi];
 }
 
-void MIPS_sys::mflo(){
+void MIPS_sys::mflo(const int32_t &d){
   registers[d] = registers[lo];
 }
 
-void MIPS_sys::mthi(){
+void MIPS_sys::mthi(const int32_t &s){
   registers[hi] = registers[s];
 }
 
-void MIPS_sys::mtlo(){
+void MIPS_sys::mtlo(const int32_t &s){
   registers[lo] = registers[s];
 }
 
-void MIPS_sys::mult(){
+void MIPS_sys::mult(const int32_t &s, const int32_t &t, const int32_t &d){
   int64_t product;
   int x1, x2;
   x1 = registers[t];
@@ -244,28 +244,28 @@ void MIPS_sys::mult(){
   registers[lo] = product & 0x00000000FFFFFFFF;
 }
 
-void MIPS_sys::multu(){
+void MIPS_sys::multu(const int32_t &s, const int32_t &t, const int32_t &d){
   uint64_t product;
   product = registers[t] * registers[s];
 }
 
-void MIPS_sys::or(){
+void MIPS_sys::or(const int32_t &s, const int32_t &t, const int32_t &d){
   registers[d] = registers[t] | registers[s];
 }
 
-void MIPS_sys::ori(const uint32_t i){
+void MIPS_sys::ori(const int32_t &s, const int32_t &t, const uint32_t i){
   registers[t] = registers[s] | i;
 }
 
-void MIPS_sys::sll(const uint32_t shamt){
+void MIPS_sys::sll(const int32_t &t, const int32_t &d, const uint32_t shamt){
   registers[d] = (registers[t] << shamt) & 0xFFFFFFFF;
 }
 
-void MIPS_sys::sllv(){
+void MIPS_sys::sllv(const int32_t &s, const int32_t &t, const int32_t &d){
   registers[d] = (registers[t] << registers[s]) & 0xFFFFFFFF;
 }
 
-void MIPS_sys::slt(){
+void MIPS_sys::slt(const int32_t &s, const int32_t &t, const int32_t &d){
   int32_t x1, x2;
   x1 = registers[s];
   x2 = registers[t];
@@ -277,7 +277,7 @@ void MIPS_sys::slt(){
   }
 }
 
-void MIPS_sys::slti(const uint32_t i){
+void MIPS_sys::slti(const int32_t &s, const int32_t &t, const uint32_t i){
   int32_t x1 = i;
   if (registers[s] < x1){
     registers[t] = 1;
@@ -287,7 +287,7 @@ void MIPS_sys::slti(const uint32_t i){
   }
 }
 
-void MIPS_sys::sltiu(const uint32_t i){
+void MIPS_sys::sltiu(const int32_t &s, const int32_t &tconst uint32_t i){
   if (registers[s] < i){
     registers[t] = 1;
   }
@@ -296,7 +296,7 @@ void MIPS_sys::sltiu(const uint32_t i){
   }
 }
 
-void MIPS_sys::sltu(){
+void MIPS_sys::sltu(const int32_t &s, const int32_t &t, const int32_t &d){
   if (registers[s] < registers[t]){
     registers[d] = 1;
   }
@@ -305,42 +305,42 @@ void MIPS_sys::sltu(){
   }
 }
 
-void MIPS_sys::sra(const uint32_t shamt){
+void MIPS_sys::sra(const int32_t &t, const int32_t &d, const uint32_t shamt){
   int32_t x1;
   x1 = registers[t];
   registers[d] = x1 >> shamt;
 }
 
-void MIPS_sys::srav(const uint32_t shamt){
+void MIPS_sys::srav(const int32_t &t, const int32_t &d, const uint32_t shamt){
   int32_t x1;
   x1 = registers[t];
   registers[d] = x1 >> shamt;
 }
 
-void MIPS_sys::srl(const uint32_t shamt){
+void MIPS_sys::srl(const int32_t &t, const int32_t &d, const uint32_t shamt){
   registers[d] = registers[t] >> shamt;
 }
 
-void MIPS_sys::slrv(){
+void MIPS_sys::slrv(const int32_t &s, const int32_t &t, const int32_t &d){
   registers[d] = registers[t] >> registers[s];
 }
 
-void MIPS_sys::sub(){
+void MIPS_sys::sub(const int32_t &s, const int32_t &t, const int32_t &d){
   int32_t x1, x2;
   x1 = registers[t];
   x2 = registers[s];
   registers[d] = x1 - x2;
 }
 
-void MIPS_sys::subu(){
+void MIPS_sys::subu(const int32_t &s, const int32_t &t, const int32_t &d){
   registers[d] = registers[t] - registers[s];
 }
 
-void MIPS_sys::xor(){
+void MIPS_sys::xor(const int32_t &s, const int32_t &t, const int32_t &d){
   registers[d] = registers[t] ^ registers[s];
 }
 
-void MIPS_sys::xori(const uint32_t i){
+void MIPS_sys::xori(const int32_t &s, const int32_t &t, const uint32_t i){
   registers[t] = registers[s] ^ i;
 }
 
