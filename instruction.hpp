@@ -14,7 +14,7 @@ class instruction{
     uint32_t address;
   public:
     instruction(int in);
-    void run(system s);
+    void run();
     void r_type();
     void i_type();
     void j_type();
