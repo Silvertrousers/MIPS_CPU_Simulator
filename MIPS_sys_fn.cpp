@@ -45,8 +45,8 @@ void MIPS_sys::ld_inst(const char* filename){
   delete[] buffer;
 }
 
-void MIPS_sys::intruction_look_up(int instr_no){
-  switch(instr_no){
+void MIPS_sys::intruction_look_up(const instruction &instr){
+  switch(instr.instr_no){
     case 1: add();
       break;
     case 2: addi();
