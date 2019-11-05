@@ -45,6 +45,116 @@ void MIPS_sys::ld_inst(const char* filename){
   delete[] buffer;
 }
 
+void MIPS_sys::intruction_look_up(int instr_no){
+  switch(instr_no){
+    case 1: add();
+      break;
+    case 2: addi();
+      break;
+    case 3: addiu();
+      break;
+    case 4: addu();
+      break;
+    case 5: and();
+      break;
+    case 6: andi();
+      break;
+    case 7: beq();
+      break;
+    case 8: bgez();
+      break;
+    case 9: bgezal();
+      break;
+    case 10: bgtz();
+      break;
+    case 11: blez();
+      break;
+    case 12: bltz();
+      break;
+    case 13: bltzal();
+      break;
+    case 14: bne();
+      break;
+    case 15: div();
+      break;
+    case 16: divu();
+      break;
+    case 17: j();
+      break;
+    case 18: jalr();
+      break;
+    case 19: jal();
+      break;
+    case 20: jr();
+      break;
+    case 21: lb();
+      break;
+    case 22: lbu();
+      break;
+    case 23: lh();
+      break;
+    case 24: lhu();
+      break;
+    case 25: lui();
+      break;
+    case 26: lw();
+      break;
+    case 27: lwl();
+      break;
+    case 28: lwr();
+      break;
+    case 29: mfhi();
+      break;
+    case 30: mflo();
+      break;
+    case 31: mthi();
+      break;
+    case 32: mtlo();
+      break;
+    case 33: mult();
+      break;
+    case 34: multu();
+      break;
+    case 35: or();
+      break;
+    case 36: ori();
+      break;
+    case 37: sb();
+      break;
+    case 38: sh();
+      break;
+    case 39: sll();
+      break;
+    case 40: sllv();
+      break;
+    case 41: slt();
+      break;
+    case 42: slti();
+      break;
+    case 43: sltiu();
+      break;
+    case 44: sltu();
+      break;
+    case 45: sra();
+      break;
+    case 46: srav();
+      break;
+    case 47: srl();
+      break;
+    case 48: srlv();
+      break;
+    case 49: sub();
+      break;
+    case 50: subu();
+      break;
+    case 51: sw();
+      break;
+    case 52: xor();
+      break;
+    case 53: xori();
+      break;
+  }
+}
 
 //Instructions
 //http://www.mrc.uidaho.edu/mrc/people/jff/digital/MIPSir.html
@@ -57,7 +167,185 @@ void MIPS_sys::ld_inst(const char* filename){
 //the unsigned operations will ignore it
 
 // to find overlfow, if the sgned bit of result
-void MIPS_sys::beq(const int &s, const int &t, const int &offset){
+
+
+void MIPS_sys::add(){
+  int32_t x1, x2;
+  x1 = registers[t];
+  x2 = registers[s];
+  registers[d] = x1 + x2;
+}
+
+void MIPS_sys::addi(const uint32_t i){
+  int32_t x1, x2;
+  x1 = registers[s];
+  x2 = i;
+  registers[t] = x1 + i;
+}
+
+void MIPS_sys::addiu(const uint32_t i){
+  registers[t] = registers[s] + x1;
+}
+
+void MIPS_sys::addu(){
+  registers[d] = registers[t] + registers[s];
+}
+
+void MIPS_sys::and(){
+  registers[d] = registers[t] & registers[s];
+}
+
+void MIPS_sys::andi(uconst int32_t i){
+  registers[t] = registers[s] & i;
+}
+
+void MIPS_sys::div(){
+  int32_t quotient, remainder;
+  int32_t x1, x2;
+  x1 = registers[t];
+  x2 = registers[s];
+  quotient = floor(x1/x2);
+  remainder = x1 - (x2 * quotient);
+  registers[lo] = quotient;
+  registers[hi] = remainder;
+}
+
+void MIPS_sys::divu(){
+  uint32_t quotient, remainder;
+  quotient = floor(registers[t]/registers[s]);
+  remainder = registers[t] - (registers[s] * quotient);
+  registers[lo] = quotient;
+  registers[hi] = remainder;
+}
+
+void MIPS_sys::mfhi(){
+  registers[d] = registers[hi];
+}
+
+void MIPS_sys::mflo(){
+  registers[d] = registers[lo];
+}
+
+void MIPS_sys::mthi(){
+  registers[hi] = registers[s];
+}
+
+void MIPS_sys::mtlo(){
+  registers[lo] = registers[s];
+}
+
+void MIPS_sys::mult(){
+  int64_t product;
+  int x1, x2;
+  x1 = registers[t];
+  x2 = registers[s];
+  product = x1 * x2;
+  registers[hi] = product >> 32;
+  registers[lo] = product & 0x00000000FFFFFFFF;
+}
+
+void MIPS_sys::multu(){
+  uint64_t product;
+  product = registers[t] * registers[s];
+}
+
+void MIPS_sys::or(){
+  registers[d] = registers[t] | registers[s];
+}
+
+void MIPS_sys::ori(const uint32_t i){
+  registers[t] = registers[s] | i;
+}
+
+void MIPS_sys::sll(const uint32_t shamt){
+  registers[d] = (registers[t] << shamt) & 0xFFFFFFFF;
+}
+
+void MIPS_sys::sllv(){
+  registers[d] = (registers[t] << registers[s]) & 0xFFFFFFFF;
+}
+
+void MIPS_sys::slt(){
+  int32_t x1, x2;
+  x1 = registers[s];
+  x2 = registers[t];
+  if (x1 < x2){
+    registers[d] = 1;
+  }
+  else{
+    registers[d] = 0;
+  }
+}
+
+void MIPS_sys::slti(const uint32_t i){
+  int32_t x1 = i;
+  if (registers[s] < x1){
+    registers[t] = 1;
+  }
+  else{
+    registers[t] =0;
+  }
+}
+
+void MIPS_sys::sltiu(const uint32_t i){
+  if (registers[s] < i){
+    registers[t] = 1;
+  }
+  else{
+    registers[t] = 0;
+  }
+}
+
+void MIPS_sys::sltu(){
+  if (registers[s] < registers[t]){
+    registers[d] = 1;
+  }
+  else{
+    registers[d] = 0;
+  }
+}
+
+void MIPS_sys::sra(const uint32_t shamt){
+  int32_t x1;
+  x1 = registers[t];
+  registers[d] = x1 >> shamt;
+}
+
+void MIPS_sys::srav(const uint32_t shamt){
+  int32_t x1;
+  x1 = registers[t];
+  registers[d] = x1 >> shamt;
+}
+
+void MIPS_sys::srl(const uint32_t shamt){
+  registers[d] = registers[t] >> shamt;
+}
+
+void MIPS_sys::slrv(){
+  registers[d] = registers[t] >> registers[s];
+}
+
+void MIPS_sys::sub(){
+  int32_t x1, x2;
+  x1 = registers[t];
+  x2 = registers[s];
+  registers[d] = x1 - x2;
+}
+
+void MIPS_sys::subu(){
+  registers[d] = registers[t] - registers[s];
+}
+
+void MIPS_sys::xor(){
+  registers[d] = registers[t] ^ registers[s];
+}
+
+void MIPS_sys::xori(const uint32_t i){
+  registers[t] = registers[s] ^ i;
+}
+
+
+void MIPS_sys::beq(const int32_t &s, const int32_t &t, const int32_t &offset){
   //delay slot
   pc += 4;
   //run(next instruction)
