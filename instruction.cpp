@@ -7,7 +7,7 @@ instruction::instruction(int32_t in){
   instr_no = 0;
 }
 
-void instruction::run(system s){
+void instruction::run(){
   if ((code >> 26) == 0){
     r_type(); //R type
   }
