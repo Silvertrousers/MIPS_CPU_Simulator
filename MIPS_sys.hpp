@@ -17,7 +17,7 @@ class MIPS_sys{
     //needs access to instruction class
 
     std::vector<uint32_t> registers;
-    uint32_t pc;
+    uint32_t pc; //equal to the address of the current instruction being run
 
     MIPS_sys();
     void increment_pc(const uint32_t &offset = 0);
