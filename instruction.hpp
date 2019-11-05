@@ -6,11 +6,11 @@ class instruction{
     int type;
     int instr_no;
 
-    int rs;
-    int rt;
-    int rd;
+    int s;
+    int t;
+    int d;
     int shamt;
-    uint32_t immediate;
+    uint32_t i;
     uint32_t address;
   public:
     instruction(int in);
