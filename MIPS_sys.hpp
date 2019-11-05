@@ -12,11 +12,11 @@ class MIPS_sys{
     memory out_mem = memory(0x30000004, 0x00000004);
 
     //division and multipication registers can only be accesses by mfhi nd mflo instructions
-    int32_t HI;
-    int32_t LO;
+    int32_t hi;
+    int32_t lo;
     //needs access to instruction class
 
-    std::vector<int> registers;
+    std::vector<uint32_t> registers;
     uint32_t pc;
 
     MIPS_sys();
@@ -25,8 +25,16 @@ class MIPS_sys{
     void store_b_in_mem(const uint32_t &t, const uint32_t &base, const int &offset);
     void store_hw_in_mem(const uint32_t &t, const uint32_t &base, const int &offset);
     void ld_inst(const char* filename);
+    void instruction_look_up(const instruction instr);
     //instructions
 
+    void add(const int32_t &s, const int32_t &t, const int32_t &d);
+    void addi(const int32_t &s, const int32_t &t, const uint32_t &i);
+    void addiu(const int32_t &s, const int32_t &t, const uint32_t &i);
+    void addu(const int32_t &s, const int32_t &t, const int32_t &d);
+    void and(const int32_t &s, const int32_t &t, const int32_t &d);
+    void andi(const int32_t &s, const int32_t &t, const uint32_t &i);
+  
     void beq(const int &s, const int &t, const int &offset);
     void bgez(const uint32_t &s, const int &offset);
     void bgezal(const uint32_t &s, const int &offset);
@@ -35,6 +43,9 @@ class MIPS_sys{
     void bltz(const uint32_t &s, const int &offset);
     void bltzal(const uint32_t &s, const int &offset);
     void bne(const uint32_t &s, const uint32_t &t, const int &offset);
+  
+    void div(const int32_t &s, const int32_t &t);
+    void divu(const int32_t &s, const int32_t &t);
 
     void j(const uint32_t &offset);
     void jalr(const uint32_t &d, const uint32_t &s);
@@ -48,10 +59,37 @@ class MIPS_sys{
     void lw(const uint32_t &t, const uint32_t &base, const int &offset);
     void lwl(const uint32_t &t, const uint32_t &base, const int &offset);
     void lwr(const uint32_t &t, const uint32_t &base, const int &offset);
+  
+    void mfhi(const int32_t &d);
+    void mflo(const int32_t &d);
+    void mthi(const int32_t &s);
+    void mtlo(const int32_t &s);
+  
+    void mult(const int32_t &s, const int32_t &t);
+    void multu(const int32_t &s, const int32_t &t);
+    void or(const int32_t &s, const int32_t &t, const int32_t &d);
+    void ori(const int32_t &s, const int32_t &t, const uint32_t &i);
 
     void sb(const uint32_t &t, const uint32_t &base, const int &offset);
     void sh(const uint32_t &t, const uint32_t &base, const int &offset);
+  
+    void sll(const int32_t &t, const int32_t &d, const uint32_t &shamt);
+    void sllv(const int32_t &s, const int32_t &t, const int32_t &d);
+    void slt(const int32_t &s, const int32_t &t, const int32_t &d);
+    void slti(const int32_t &s, const int32_t &t, const uint32_t &i);
+    void sltiu(const int32_t &s, const int32_t &t, const uint32_t &i);
+    void sltu(const int32_t &s, const int32_t &t, const int32_t &d);
+    void sra(const int32_t &t, const int32_t &d, const uint32_t &shamt);
+    void srav(const int32_t &s, const int32_t &t, const int32_t &d);
+    void srl(const int32_t &t, const int32_t &d, const uint32_t &shamt);
+    void srlv(const int32_t &s, const int32_t &t, const int32_t &d);
+  
     void sw(const uint32_t &t, const uint32_t &base, const int &offset);
+  
+    void sub(const int32_t &s, const int32_t &t, const int32_t &d);
+    void subu(const int32_t &s, const int32_t &t, const int32_t &d);
+    void xor(const int32_t &s, const int32_t &t, const int32_t &d);
+    void xori(const int32_t &s, const int32_t &t, const uint32_t &i);
 };
 
 //#endif
