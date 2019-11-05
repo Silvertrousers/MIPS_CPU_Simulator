@@ -21,9 +21,9 @@ void instruction::run(system s){
 
 void instruction::r_type(){
   type = 0;
-  rs = (code & 0x03E00000) >> 21;
-  rt = (code & 0x001F0000) >> 16;
-  rd = (code & 0x0000F800) >> 11;
+  s = (code & 0x03E00000) >> 21;
+  t = (code & 0x001F0000) >> 16;
+  d = (code & 0x0000F800) >> 11;
   shamt = (code & 0x000007C0) >> 6;
   int fncode = (code & 0x0000003F);
   switch(fncode){
@@ -107,9 +107,9 @@ void instruction::r_type(){
 
 void instruction::i_type(){
   type = 1;
-  rs = (code & 0x03E00000) >> 21;
-  rt = (code & 0x001F0000) >> 16;
-  immediate = (code & 0x0000FFFF);
+  s = (code & 0x03E00000) >> 21;
+  t = (code & 0x001F0000) >> 16;
+  i = (code & 0x0000FFFF);
   int opcode = (code >> 26);
   switch(opcode){
     case 0x00000008:
