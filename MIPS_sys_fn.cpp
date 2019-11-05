@@ -18,7 +18,7 @@ void MIPS_sys::increment_pc(const uint32_t &offset /* = 0*/ ){
   pc += 4 + offset;
 }
 
-void MIPS_sys::ld_inst(const char* filename){
+oid MIPS_sys::ld_inst(const char* filename){
   char* buffer;
   byte temp;
   long size;
@@ -31,15 +31,15 @@ void MIPS_sys::ld_inst(const char* filename){
     file.read (buffer, size);
     file.close();
     for(int i=0;i<size;i++){
-      std::cout<<"ass "<<temp.val<<std::endl;
       temp.val = buffer[i];
-      std::cout<<"ass "<<temp.val<<std::endl;
-      temp.address = i + 1;
+      temp.address = i + 10000000;
       instruction_mem.data.push_back(temp);
     }
   }
   else{
     std::cout<<"Stop, "<<filename<<" wasn't opened"<<std::endl;
+    //need to throw and exception and call exit()
+    std::exit();
   }
 
   delete[] buffer;
@@ -345,7 +345,7 @@ void MIPS_sys::xori(const int32_t &s, const int32_t &t, const uint32_t i){
 }
 
 
-void MIPS_sys::beq(const int32_t &s, const int32_t &t, const int32_t &offset){
+void MIPS_sys::beq(const int &s, const int &t, const int &offset){
   //delay slot
   pc += 4;
   //run(next instruction)
@@ -357,7 +357,7 @@ void MIPS_sys::bgez(const uint32_t &s, const int &offset){
   //delay slot
   pc += 4;
   //run(next instruction)
-  if(registers[s] >= 0){
+  if(static_cast<int>(registers[s]) >= 0){
     pc += sign_extend(offset, 16) << 2;//branch time
   }
 }
@@ -370,7 +370,7 @@ void MIPS_sys::bgtz(const uint32_t &s, const int &offset){
   //delay slot
   pc += 4;
   //run(next instruction)
-  if(registers[s] > 0){
+  if(static_cast<int>(registers[s]) > 0){
     pc += sign_extend(offset, 16) << 2;//branch time
   }
 }
@@ -378,7 +378,7 @@ void MIPS_sys::blez(const uint32_t &s, const int &offset){
   //delay slot
   pc += 4;
   //run(next instruction)
-  if(registers[s] <= 0){
+  if(static_cast<int>(registers[s]) <= 0){
     pc += sign_extend(offset, 16) << 2;//branch time
   }
 }
@@ -386,7 +386,7 @@ void MIPS_sys::bltz(const uint32_t &s, const int &offset){
   //delay slot
   pc += 4;
   //run(next instruction)
-  if(registers[s] < 0){
+  if(static_cast<int>(registers[s]) < 0){
     pc += sign_extend(offset, 16) << 2;//branch time
   }
 }
@@ -431,12 +431,12 @@ void MIPS_sys::jr(const uint32_t &s){
   pc = registers[s];
 }
 
-void MIPS_sys::lb(const uint32_t &t, const uint32_t &base, const int &off){
+void MIPS_sys::lb(const uint32_t &t, const uint32_t &b, const int &off){
   int in;
+  int base = registers[b];
   registers[t] = 0;
   int offset = sign_extend(off, 16);
   if((data_mem.offset <= (offset + base)) && ((offset+base) < (data_mem.offset + data_mem.length))){
-
     for(int i=0; i < data_mem.data.size(); i++){
       if((offset+base) == data_mem.data[i].address){
         registers[t] = sign_extend(data_mem.data[i].val, 8);
@@ -453,8 +453,9 @@ void MIPS_sys::lb(const uint32_t &t, const uint32_t &base, const int &off){
     }
   }
 }
-void MIPS_sys::lbu(const uint32_t &t, const uint32_t &base, const int &off){
+void MIPS_sys::lbu(const uint32_t &t, const uint32_t &b, const int &off){
   int in;
+  int base = registers[b];
   registers[t] = 0;
   int offset = sign_extend(offset, 16);
   if((data_mem.offset <= (offset + base)) && ((offset+base) < (data_mem.offset + data_mem.length))){
@@ -470,12 +471,13 @@ void MIPS_sys::lbu(const uint32_t &t, const uint32_t &base, const int &off){
         std::cin >> in;
         in_mem.data[j].val = in & 0x000000FF;
         registers[t] = 0x00000000 | in_mem.data[j].val;
-        }
       }
     }
   }
-void MIPS_sys::lh(const uint32_t &t, const uint32_t &base, const int &offset){
+}
+void MIPS_sys::lh(const uint32_t &t, const uint32_t &b, const int &offset){
   int in;
+  int base = registers[b];
   if((data_mem.offset <= (offset + base)) && ((offset+base) < (data_mem.offset + data_mem.length))){
     lb(t, base, offset);
     registers[t] = registers[t] << 8;
@@ -493,8 +495,9 @@ void MIPS_sys::lh(const uint32_t &t, const uint32_t &base, const int &offset){
   }
   registers[0] = 0;
 }
-void MIPS_sys::lhu(const uint32_t &t, const uint32_t &base, const int &offset){
+void MIPS_sys::lhu(const uint32_t &t, const uint32_t &b, const int &offset){
   int in;
+  int base = registers[b];
   if((data_mem.offset <= (offset + base)) && ((offset+base) < (data_mem.offset + data_mem.length))){
     lbu(t, base, offset);
     registers[t] = registers[t] << 8;
@@ -517,8 +520,9 @@ void MIPS_sys::lhu(const uint32_t &t, const uint32_t &base, const int &offset){
 void MIPS_sys::lui(const uint32_t &t, const uint32_t &i){
   registers[t] =  i << 16;
 }
-void MIPS_sys::lw(const uint32_t &t, const uint32_t &base, const int &offset){
+void MIPS_sys::lw(const uint32_t &t, const uint32_t &b, const int &offset){
   int in;
+  int base = registers[b];
   if((data_mem.offset <= (offset + base)) && ((offset+base) < (data_mem.offset + data_mem.length))){
     lhu(t, base, offset);
     registers[t] = registers[t] << 16;
@@ -536,17 +540,22 @@ void MIPS_sys::lw(const uint32_t &t, const uint32_t &base, const int &offset){
   }
   registers[0] = 0;
 }
-void MIPS_sys::lwl(const uint32_t &t, const uint32_t &base, const int &offset){
+//look at diagram and reimpliment
+void MIPS_sys::lwl(const uint32_t &t, const uint32_t &b, const int &offset){
   int temp = registers [t] & 0x0000FFFF;
+  int base = registers[b];
   lw(t, base, offset);
   registers[t] = (registers[t] & 0xFFFF0000) | temp;
 }
-void MIPS_sys::lwr(const uint32_t &t, const uint32_t &base, const int &offset){
+//look at diagram and reimpliment
+void MIPS_sys::lwr(const uint32_t &t, const uint32_t &b, const int &offset){
+  int base = registers[b];
   int temp = registers [t] & 0xFFFF0000;
-  lw(t, base, offset);
+  lw(t, base, offset - 3);
   registers[t] = (registers[t] & 0x0000FFFF) | temp;
 }
-void MIPS_sys::sb(const uint32_t &t, const uint32_t &base, const int &offset){
+void MIPS_sys::sb(const uint32_t &t, const uint32_t &b, const int &offset){
+  int base = registers[b];
   if((data_mem.offset <= (offset + base)) && ((offset+base) < (data_mem.offset + data_mem.length))){
     store_b_in_mem(t, base, offset);
   }
@@ -556,13 +565,15 @@ void MIPS_sys::sb(const uint32_t &t, const uint32_t &base, const int &offset){
 
   }
 }
-void MIPS_sys::sh(const uint32_t &t, const uint32_t &base, const int &offset){
+void MIPS_sys::sh(const uint32_t &t, const uint32_t &b, const int &offset){
+  int base = registers[b];
   store_hw_in_mem(t, base, offset);
-
   if((out_mem.offset <= (offset + base)) && ((offset+base) < (out_mem.offset + out_mem.length))){
     std::cout<<(registers[t] & 0x0000FFFF)<<std::endl;
-  }}
-void MIPS_sys::sw(const uint32_t &t, const uint32_t &base, const int &offset){
+  }
+}
+void MIPS_sys::sw(const uint32_t &t, const uint32_t &b, const int &offset){
+  int base = registers[b];
   registers[0] = ((0xFFFF0000 & registers[t]) >> 16);//save upp hw of word
   store_hw_in_mem(0, base, offset);//store upper hw in lower mem address (correct for big endian)
   registers[0] = (0x0000FFFF & registers[t]);//save low hw of word
