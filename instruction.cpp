@@ -42,10 +42,10 @@ void instruction::r_type(){
     case 0x0000001B:
       instr_no = 16;
       break;
-    case 0x00000008:
+    case 0x00000009:
       instr_no = 18;
       break;
-    case 0x00000009:
+    case 0x00000008:
       instr_no = 20;
       break;
     case 0x00000010:
