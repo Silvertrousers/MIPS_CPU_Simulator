@@ -1,6 +1,9 @@
-#include <iostream>
-#include <vectors>
 #include "instruction.hpp"
+
+instruction::instruction(){
+  code = 0;
+  instr_no = 0;
+}
 
 instruction::instruction(int32_t in){
   code = in;
@@ -42,10 +45,10 @@ void instruction::r_type(){
     case 0x0000001B:
       instr_no = 16;
       break;
-    case 0x00000009:
+    case 0x00000009://jalr
       instr_no = 18;
       break;
-    case 0x00000008:
+    case 0x00000008://jr
       instr_no = 20;
       break;
     case 0x00000010:
@@ -87,7 +90,7 @@ void instruction::r_type(){
     case 0x00000007:
       instr_no = 46;
       break;
-    case 0x00000002
+    case 0x00000002:
       instr_no = 47;
       break;
     case 0x00000006:
@@ -125,7 +128,7 @@ void instruction::i_type(){
       instr_no = 7;
       break;
     case 0x00000001:
-      switch(rt){
+      switch(t){
         case 0x01:
           instr_no = 8;
           break;

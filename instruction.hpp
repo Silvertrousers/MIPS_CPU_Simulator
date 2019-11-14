@@ -1,9 +1,10 @@
-#include <iostream>
+#include <stdint.h>
 
 class instruction{
   private:
     uint32_t code;
     int type;
+  public:
     int instr_no;
 
     int s;
@@ -12,10 +13,10 @@ class instruction{
     int shamt;
     uint32_t i;
     uint32_t address;
-  public:
+    instruction();
     instruction(int in);
     void run();
     void r_type();
     void i_type();
     void j_type();
-}
+};

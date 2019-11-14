@@ -1,85 +1,110 @@
+
 //assuming the identified fucntion has been defined
-bool checker(int inst_word, std::string instruction_name, MIPS_sys s){
+bool checker(std::string instruction_name, MIPS_sys s){
+  if (instr_no == 0){
+    std::exit(-12);
+  }
   switch(instruction_name){
+    // for all instructions that write to regisers, if rd is r0, set the value being written(no matter what it is) to zero
     //for all brnch and jump instructions make sure the offset + base is located in the instruction memory
+    case add: //integer overflow, destination wrong
+      int64_t result = s.registers[s] + s.registers[t];
+      if (result >> 32 == 0){
+        return true;
+      }
+      std::exit(-10);
+    case addi:
+      int64_t result = s.registers[t] + i;
+      if (result >> 32 == 0){
+        return true;
+      }
+      std::exit(-10);
+    case addiu:
+      int64_t result = s.registers[t] + i;
+      if (result >> 32 == 0){
+        return true;
+      }
+      std::exit(-10);
+    case addu:
+      int64_t result = s.registers[s] + s.registers[t];
+      if (result >> 32 == 0){
+        return true;
+      }
+      std::exit(-10);
+    case and:
+      return true;
+    case andi:
+      return true;
     case beq:
-      if((0x10000000 <= (s.pc + (inst_word.offset << 2))) && ((s.pc + (inst_word.offset << 2)) < 0x11000000)){
+      if((0x10000000 <= (s.pc + (i << 2))) && ((s.pc + (i << 2)) < 0x11000000)){
         return true;
       }
       std::exit(-11);
     case bgez:
-      if((0x10000000 <= (s.pc + (inst_word.offset << 2))) && ((s.pc + (inst_word.offset << 2)) < 0x11000000)){
+      if((0x10000000 <= (s.pc + (i << 2))) && ((s.pc + (i << 2)) < 0x11000000)){
         return true;
       }
       std::exit(-11);
     case bgezal:
-      if((0x10000000 <= (s.pc + (inst_word.offset << 2))) && ((s.pc + (inst_word.offset << 2)) < 0x11000000)){
+      if((0x10000000 <= (s.pc + (i << 2))) && ((s.pc + (i << 2)) < 0x11000000)){
         return true;
       }
       std::exit(-11);
     case bgtz:
-      if((0x10000000 <= (s.pc + (inst_word.offset << 2))) && ((s.pc + (inst_word.offset << 2)) < 0x11000000)){
+      if((0x10000000 <= (s.pc + (i << 2))) && ((s.pc + (i << 2)) < 0x11000000)){
         return true;
       }
       std::exit(-11);
     case blez:
-      if((0x10000000 <= (s.pc + (inst_word.offset << 2))) && ((s.pc + (inst_word.offset << 2)) < 0x11000000)){
+      if((0x10000000 <= (s.pc + (i << 2))) && ((s.pc + (i << 2)) < 0x11000000)){
         return true;
       }
       std::exit(-11);
     case bltz:
-      if((0x10000000 <= (s.pc + (inst_word.offset << 2))) && ((s.pc + (inst_word.offset << 2)) < 0x11000000)){
+      if((0x10000000 <= (s.pc + (i << 2))) && ((s.pc + (i << 2)) < 0x11000000)){
         return true;
       }
       std::exit(-11);
     case bltzal:
-      if((0x10000000 <= (s.pc + (inst_word.offset << 2))) && ((s.pc + (inst_word.offset << 2)) < 0x11000000)){
+      if((0x10000000 <= (s.pc + (i << 2))) && ((s.pc + (i << 2)) < 0x11000000)){
         return true;
       }
       std::exit(-11);
     case bne:
-      if((0x10000000 <= (s.pc + (inst_word.offset << 2))) && ((s.pc + (inst_word.offset << 2)) < 0x11000000)){
+      if((0x10000000 <= (s.pc + (i << 2))) && ((s.pc + (i << 2)) < 0x11000000)){
         return true;
       }
       std::exit(-11);
 
     case j:
-      if(){
-
-      }
+      return true;
     case jalr:
-    //chech offset + base is located in the instruction memory
+      return true;
     case jal:
-    //chech offset + base is located in the instruction memory
+      return true;
     case jr:
-    //chech offset + base is located in the instruction memory must be done within the function
+      return true;
     case lb:
-    //check for sign extension of offset
-    //chech offset + base is located in the data or input memory
+      return true;
     case lbu:
-    //check for sign extension of offset
-    //chech offset + base is located in the data or input memory
+      return true;
     case lh:
-    //check for sign extension of offset
-    //chech offset + base is located in the data or input memory
+      return true;
     case lhu:
-    //check for sign extension of offset
-    //chech offset + base is located in the data or input memory
+      return true;
     case lui:
-    //check for sign extension of offset
-    //chech offset + base is located in the data or input memory
+      return true;
     case lw:
-    //check for sign extension of offset
-    //chech offset + base is located in the data or input memory
+      return true;
     case lwl:
-    //check for sign extension of offset
-    //chech offset + base is located in the data or input memory
+    //need to finish implementation
     case lwr:
-    //check for sign extension of offset
-    //chech offset + base is located in the data or input memory
-
+    //need to finish implementation
     case sb:
+      return true;
     case sh:
+      return true;
     case sw:
+      return true;
   }
 }
