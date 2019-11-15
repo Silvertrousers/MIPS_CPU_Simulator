@@ -49,13 +49,10 @@ int main(int argc, char *argv[] ){
         }
       }
       checker(inst, s);
-      s.instruction_look_up(inst);//to do: need to make sure the input to the
-                                  //instructions inside this aare not just declared but are aassociated with the member values of inst.
-                                  //maaybe checking should be done in this function in the case statement before everything is called
-       //go to next instruction
+      s.instruction_look_up(inst);
     }
     else{
-      std::exit(-12);//if pc goes too high, return memory error since trying to execute from wrong part of mem
+      std::exit(-11);//if pc goes too high, return memory error since trying to execute from wrong part of mem
     }
     if(print){display_state(s);}
   }
@@ -113,8 +110,9 @@ void display_state(MIPS_sys s){
   }
   std::cerr<<std::endl;
 }
+
 bool checker(const instruction &instr, MIPS_sys s){
-  int64_t result, x1, x2;
+  int64_t result;
   if (instr.instr_no == 0){
     std::exit(-12);
   }
@@ -122,31 +120,29 @@ bool checker(const instruction &instr, MIPS_sys s){
     // for all instructions that write to regisers, if rd is r0, set the value being written(no matter what it is) to zero
     //for all brnch and jump instructions make sure the offset + base is located in the instruction memory
     case 1: //add integer overflow, destination wrong
-      x1 = s.registers[instr.s];
-      x2 = s.registers[instr.t];
-      result = x1 + x2;
-      if (x1 > 0 && x2 > 0 && result < 0){
-        std::exit(-10);
+      result = s.registers[instr.s] + s.registers[instr.t];
+      if (result >> 32 == 0){
+        return true;
       }
-      if (x1 < 0 && x2 < 0 && result > 0){
-        std::exit(-10);
-      }
-      return true;
+      std::exit(-10);
     case 2: //addi
-      x1 = s.registers[instr.s];
-      x2 = instr.i;
-      result = x1 + x2;
-      if (x1 > 0 && x2 > 0 && result < 0){
-        std::exit(-10);
+      result = s.registers[instr.t] + instr.i;
+      if (result >> 32 == 0){
+        return true;
       }
-      if (x1 < 0 && x2 < 0 && result > 0){
-        std::exit(-10);
-      }
-      return true;
+      std::exit(-10);
     case 3: //addiu
-      return true;
+      result = s.registers[instr.t] + instr.i;
+      if (result >> 32 == 0){
+        return true;
+      }
+      std::exit(-10);
     case 4: //addu
-      return true;
+      result = s.registers[instr.s] + s.registers[instr.t];
+      if (result >> 32 == 0){
+        return true;
+      }
+      std::exit(-10);
     case 5://and:
       return true;
     case 6://andi:
@@ -191,77 +187,9 @@ bool checker(const instruction &instr, MIPS_sys s){
         return true;
       }
       std::exit(-11);
-    case 15: //div
-      return true;
-    case 16: //divu
-      return true;
-
-
     //case 27://lwl:
     //need to finish implementation
     //case 28://lwr:
-    //need to finish implementation
-    case 29: //mfhi
-      return true;
-    case 30: //mflo
-      return true;
-    case 31: //mthi
-      return true;
-    case 32: //mtlo
-      return true;
-    case 33: //mult
-      return true;
-    case 34: //multu
-      return true;
-    case 35: //or
-      return true;
-    case 36: //ori
-      return true;
-    case 39: //sll
-      return true;
-    case 40: //sllv
-      return true;
-    case 41: //slt
-      return true;
-    case 42: //slti
-      return true;
-    case 43: //sltiu
-      return true;
-    case 44: //sltu
-      return true;
-    case 45: //sra
-      return true;
-    case 46: //srav
-      return true;
-    case 47: //srl
-      return true;
-    case 48: //srlv
-      return true;
-    case 49: //sub
-      x1 = s.registers[instr.s];
-      x2 = -s.registers[instr.t];
-      result = x1 + x2;
-      if (x1 > 0 && x2 > 0 && result < 0){
-        std::exit(-10);
-      }
-      if (x1 < 0 && x2 < 0 && result > 0){
-        std::exit(-10);
-      }
-      return true;
-    case 50: //subu
-      x1 = s.registers[instr.s];
-      x2 = -instr.i;
-      result = x1 + x2;
-      if (x1 > 0 && x2 > 0 && result < 0){
-        std::exit(-10);
-      }
-      if (x1 < 0 && x2 < 0 && result > 0){
-        std::exit(-10);
-      }
-      return true;
-    case 52: //xor
-      return true;
-    case 53: //xori
-      return true;
+    //need to finish implementatio
   }
 }
