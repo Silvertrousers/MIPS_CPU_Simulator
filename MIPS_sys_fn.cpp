@@ -339,12 +339,12 @@ void MIPS_sys::xori(const int32_t &s, const int32_t &t, const uint32_t &i){
 
 void MIPS_sys::beq(const int &s, const int &t, const int &offset){
   if(registers[s] == registers[t]){
-    pc += (4 + (sign_extend(offset, 16) << 2));//branch time
+    pc += (sign_extend(offset, 16) << 2);//branch time
   }
 }
 void MIPS_sys::bgez(const uint32_t &s, const int &offset){
   if(static_cast<int>(registers[s]) >= 0){
-    pc += (4 + (sign_extend(offset, 16) << 2));//branch time
+    pc += (sign_extend(offset, 16) << 2);//branch time
   }
 }
 void MIPS_sys::bgezal(const uint32_t &s, const int &offset){
@@ -353,17 +353,17 @@ void MIPS_sys::bgezal(const uint32_t &s, const int &offset){
 }
 void MIPS_sys::bgtz(const uint32_t &s, const int &offset){
   if(static_cast<int>(registers[s]) > 0){
-    pc += (4 + (sign_extend(offset, 16) << 2));//branch time
+    pc += (sign_extend(offset, 16) << 2);//branch time
   }
 }
 void MIPS_sys::blez(const uint32_t &s, const int &offset){
   if(static_cast<int>(registers[s]) <= 0){
-    pc += (4 + (sign_extend(offset, 16) << 2));//branch time
+    pc += (sign_extend(offset, 16) << 2);//branch time
   }
 }
 void MIPS_sys::bltz(const uint32_t &s, const int &offset){
   if(static_cast<int>(registers[s]) < 0){
-    pc += (4 + (sign_extend(offset, 16) << 2));//branch time
+    pc += (sign_extend(offset, 16) << 2);//branch time
   }
 }
 void MIPS_sys::bltzal(const uint32_t &s, const int &offset){
@@ -373,7 +373,7 @@ void MIPS_sys::bltzal(const uint32_t &s, const int &offset){
 }
 void MIPS_sys::bne(const uint32_t &s, const uint32_t &t, const int &offset){
   if(registers[s] != registers[t]){
-    pc += (4 + (sign_extend(offset, 16) << 2));//branch time
+    pc += (sign_extend(offset, 16) << 2);//branch time
   }
 }
 

@@ -1,0 +1,2 @@
+testID: bgez_bt.bin, Instr: BGEZ, Status: PASS, Author: cyrus, Notes: ----, 
+testID: bgez_illegal_back, Instr: BGEZ, Status: PASS, Author: cyrus, Notes: ----, 

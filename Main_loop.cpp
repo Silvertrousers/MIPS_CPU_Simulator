@@ -23,6 +23,7 @@ int main(int argc, char *argv[] ){
   instruction inst, inst_delay_slot;//inst_ds is reserved for delay slot instructions
   s.ld_inst(argv[1]);
   if(print){
+    std::cerr<<*argv[1]<<std::endl;
     display_inst_byte(s);
     std::cerr<<"Binary Loaded into memory"<<std::endl<<std::endl;
     std::cerr<<"program executing..."<<std::endl;
