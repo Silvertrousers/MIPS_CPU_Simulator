@@ -1,0 +1,1 @@
+testID: lhu_bt.bin, Instr: LHU, Status: PASS, Author: cyrus, Notes: loads correct byte without sign extension, 

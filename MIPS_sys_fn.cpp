@@ -513,7 +513,7 @@ void MIPS_sys::lhu(const uint32_t &t, const uint32_t &b, const int &offset){
   int in;
   int base = registers[b];
   if(((offset + base) % 2) == 0){
-    if(in_data_mem(offset + base)){
+    if(in_data_mem(offset + base) || in_instruction_mem(offset + base)){
       lbu(t, b, offset);
       registers[t] = registers[t] << 8;
       lbu(0, b, (offset + 1));

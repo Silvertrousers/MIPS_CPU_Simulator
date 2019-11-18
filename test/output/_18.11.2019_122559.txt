@@ -1,0 +1,1 @@
+testID: lhu_bt.bin, Instr: LHU, Status: FAIL, Author: cyrus, Notes: loads wrong byte, 

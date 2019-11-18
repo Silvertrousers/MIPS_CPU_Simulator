@@ -107,12 +107,42 @@ then
 else
     echo "testID: j_bt.bin, Instr: J, Status: FAIL, Author: $USER, Notes: No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
+OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/lbu_bt.bin")
+if test $? = 16
+then
+    echo "testID: lbu_bt.bin, Instr: LBU, Status: PASS, Author: $USER, Notes: loads correct byte without sign extension, " | paste -sd ' ' >> ./test/output/"$dt"
+elif test $? = 240
+then
+    echo "testID: lbu_bt.bin, Instr: LBU, Status: FAIL, Author: $USER, Notes: loads correct byte but has sign extension, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "testID: lbu_bt.bin, Instr: LBU, Status: FAIL, Author: $USER, Notes: loads wrong byte, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/lb_bt.bin")
+if test $? = 240
+then
+    echo "testID: lb_bt.bin, Instr: LB, Status: PASS, Author: $USER, Notes: loads correct byte with sign extension, " | paste -sd ' ' >> ./test/output/"$dt"
+elif test $? = 16
+then
+    echo "testID: lb_bt.bin, Instr: LB, Status: FAIL, Author: $USER, Notes: loads correct byte but has no sign extension, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "testID: lb_bt.bin, Instr: LB, Status: FAIL, Author: $USER, Notes: loads wrong byte, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/lhu_bt.bin")
+if test $? = 16
+then
+    echo "testID: lhu_bt.bin, Instr: LHU, Status: PASS, Author: $USER, Notes: loads correct byte without sign extension, " | paste -sd ' ' >> ./test/output/"$dt"
+elif test $? = 240
+then
+    echo "testID: lhu_bt.bin, Instr: LHU, Status: FAIL, Author: $USER, Notes: loads correct byte but has sign extension, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "testID: lhu_bt.bin, Instr: LHU, Status: FAIL, Author: $USER, Notes: loads wrong byte, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
 OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/lb_sb_bt.bin")
 if test $? = 3
 then
-    echo "testID: lb_sb_bt.bin, Instr: LB and SB, Status: PASS, Author: $USER, Notes: ----, " | paste -sd ' ' >> ./test/output/"$dt"
+    echo "testID: lb_sb_bt.bin, Instr: SB, Status: PASS, Author: $USER, Notes: ----, " | paste -sd ' ' >> ./test/output/"$dt"
 else
-    echo "testID: lb_sb_bt.bin, Instr: LB and SB, Status: FAIL, Author: $USER, Notes: No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
+    echo "testID: lb_sb_bt.bin, Instr: SB, Status: FAIL, Author: $USER, Notes: No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/lb_i.bin")
 echo $?
