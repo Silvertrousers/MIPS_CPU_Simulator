@@ -1,0 +1,1 @@
+testID: jalr_bt.bin, Instr: JALR, Status: PASS, Author: cyrus, Notes: link returns to correct place, 

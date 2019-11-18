@@ -1,0 +1,3 @@
+testID: j_ds.bin, Instr: J, Status: PASS, Author: cyrus, Notes: ----, 
+testID: jal_bt.bin, Instr: JAL, Status: FAIL, Author: cyrus, Notes: not sure hats wrong here, 
+testID: j_bt.bin, Instr: J, Status: FAIL, Author: cyrus, Notes: Jump went one instruction too far, 

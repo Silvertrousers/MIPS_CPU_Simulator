@@ -1,0 +1,1 @@
+testID: bgezal_bt.bin, Instr: BGEZAL, Status: PASS, Author: cyrus, Notes: branch returned to correct place 

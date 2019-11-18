@@ -1,0 +1,1 @@
+testID: jalr_bt.bin, Instr: JALR, Status: FAIL, Author: cyrus, Notes: not sure hats wrong here, 

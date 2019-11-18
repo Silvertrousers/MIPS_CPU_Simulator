@@ -1,0 +1,3 @@
+testID: j_ds.bin, Instr: J, Status: FAIL, Author: cyrus, Notes: Delay slot instr not executing, 
+testID: jal_bt.bin, Instr: JAL, Status: PASS, Author: cyrus, Notes: link returns to correct place, 
+testID: j_bt.bin, Instr: J, Status: PASS, Author: cyrus, Notes: ----, 

@@ -32,28 +32,30 @@ int main(int argc, char *argv[] ){
   while(s.pc != 0){//go instruction by instruction until jump to 0, only works if i have a valid .bin file
     s.registers[0] = 0;//makes sure r0 is always 0
     s.pc += 4;
-    if((0x10000000 <= s.pc) && (s.pc < 0x11000000)){//checks if pc is looking at correct memory location
-      inst = instruction(word_conc(s, s.pc)); //look at the instruction at the memory location indicaated by pc
-      inst_delay_slot = instruction(word_conc(s, s.pc + 4));
-      if(print){
-        std::cerr<<"pc: "<<std::hex<<(s.pc)<<", instruction word: "<<std::hex<<word_conc(s, s.pc)<<std::endl;
-      }
-      inst.run();
-      inst_delay_slot.run();
-      if(((inst.instr_no >= 7) && (inst.instr_no <= 14)) || ((inst.instr_no >= 17) && (inst.instr_no <= 20))){
-        if(((inst_delay_slot.instr_no >= 7) && (inst_delay_slot.instr_no <= 14)) || ((inst_delay_slot.instr_no >= 17) && (inst_delay_slot.instr_no <= 20))){
-          std::exit(-13);//-13 exit code says that there was a double jump
+    if(s.pc != 0){
+      if((0x10000000 <= s.pc) && (s.pc < 0x11000000)){//checks if pc is looking at correct memory location
+        inst = instruction(word_conc(s, s.pc)); //look at the instruction at the memory location indicaated by pc
+        inst_delay_slot = instruction(word_conc(s, s.pc + 4));
+        if(print){
+          std::cerr<<"pc: "<<std::hex<<(s.pc)<<", instruction word: "<<std::hex<<word_conc(s, s.pc)<<std::endl;
         }
-        else{
-          checker(inst_delay_slot, s);
-          s.instruction_look_up(inst_delay_slot);
+        inst.run();
+        inst_delay_slot.run();
+        if(((inst.instr_no >= 7) && (inst.instr_no <= 14)) || ((inst.instr_no >= 17) && (inst.instr_no <= 20))){
+          if(((inst_delay_slot.instr_no >= 7) && (inst_delay_slot.instr_no <= 14)) || ((inst_delay_slot.instr_no >= 17) && (inst_delay_slot.instr_no <= 20))){
+            std::exit(-13);//-13 exit code says that there was a double jump
+          }
+          else{
+            checker(inst_delay_slot, s);
+            s.instruction_look_up(inst_delay_slot);
+          }
         }
+        checker(inst, s);
+        s.instruction_look_up(inst);
       }
-      checker(inst, s);
-      s.instruction_look_up(inst);
-    }
-    else{
-      std::exit(-11);//if pc goes too high, return memory error since trying to execute from wrong part of mem
+      else{
+        std::exit(-11);//if pc goes too high, return memory error since trying to execute from wrong part of mem
+      }
     }
     if(print){display_state(s);}
   }

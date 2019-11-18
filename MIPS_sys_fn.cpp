@@ -380,11 +380,9 @@ void MIPS_sys::bne(const uint32_t &s, const uint32_t &t, const int &offset){
 void MIPS_sys::j(const uint32_t &offset){
   int top_4_bits =(pc + 4) & 0xF0000000;
   int bttm_28_bits = (offset & 0x03FFFFFF) << 2;
-  //delay slot
-  //pc += 4;
-  //run(next instruction)
+
   if((0x10000000 <= (top_4_bits | bttm_28_bits)) && ((top_4_bits | bttm_28_bits) < 0x11000000)){
-    pc = top_4_bits | bttm_28_bits;
+    pc = (top_4_bits | bttm_28_bits) - 4;
   }
   else{
     exit(-11);//memory exception
@@ -392,11 +390,8 @@ void MIPS_sys::j(const uint32_t &offset){
 }
 void MIPS_sys::jalr(const uint32_t &d, const uint32_t &s){
   registers[d] = pc + 8;
-  //delay slot
-  //pc += 4;
-  //run(next instruction)
   if(((0x10000000 <= registers[s]) && (registers[s] < 0x11000000)) || s == 0){
-    pc = registers[s];
+    pc = registers[s] - 4;
   }
   else{
     exit(-11);//memory exception
@@ -407,11 +402,8 @@ void MIPS_sys::jal(const uint32_t &offset){
   j(offset);
 }
 void MIPS_sys::jr(const uint32_t &s){
-  //delay slot
-  //pc += 4;
-  //run(next instruction)
   if(((0x10000000 <= registers[s]) && (registers[s] < 0x11000000))|| s == 0){
-    pc = registers[s];
+    pc = registers[s] - 4;
   }
   else{
     exit(-11);//memory exception

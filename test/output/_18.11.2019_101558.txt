@@ -1,0 +1,11 @@
+testID: bgez_bt.bin, Instr: BGEZ, Status: PASS, Author: cyrus, Notes: ----, 
+testID: bgez_illegal_back, Instr: BGEZ, Status: PASS, Author: cyrus, Notes: ----, 
+testID: bgezal_bt.bin, Instr: BGEZAL, Status: PASS, Author: cyrus, Notes: branch returned to correct place 
+testID: beq_bt.bin, Instr: BEQ, Status: PASS, Author: cyrus, Notes: ----, 
+testID: beq_illegal_back, Instr: BEQ, Status: PASS, Author: cyrus, Notes: ----, 
+testID: j_ds.bin, Instr: J, Status: PASS, Author: cyrus, Notes: ----, 
+testID: jal_bt.bin, Instr: JAL, Status: FAIL, Author: cyrus, Notes: not sure hats wrong here, 
+testID: lb_sb_bt.bin, Instr: LB and SB, Status: PASS, Author: cyrus, Notes: ----, 
+testID: jr_bt.bin, Instr: JR, Status: PASS, Author: cyrus, Notes: ----, 
+testID: j_bt.bin, Instr: J, Status: PASS, Author: cyrus, Notes: ----, 
+testID: lw_sw_bt.bin, Instr: LW and SW, Status: PASS, Author: cyrus, Notes: ----, 
