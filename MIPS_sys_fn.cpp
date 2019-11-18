@@ -198,32 +198,32 @@ void MIPS_sys::div(const int32_t &s, const int32_t &t){
   x2 = registers[s];
   quotient = floor(x1/x2);
   remainder = x1 - (x2 * quotient);
-  registers[lo] = quotient;
-  registers[hi] = remainder;
+  lo = quotient;
+  hi = remainder;
 }
 
 void MIPS_sys::divu(const int32_t &s, const int32_t &t){
   uint32_t quotient, remainder;
   quotient = floor(registers[t]/registers[s]);
   remainder = registers[t] - (registers[s] * quotient);
-  registers[lo] = quotient;
-  registers[hi] = remainder;
+  lo = quotient;
+  hi = remainder;
 }
 
 void MIPS_sys::mfhi(const int32_t &d){
-  registers[d] = registers[hi];
+  registers[d] = hi;
 }
 
 void MIPS_sys::mflo(const int32_t &d){
-  registers[d] = registers[lo];
+  registers[d] = lo;
 }
 
 void MIPS_sys::mthi(const int32_t &s){
-  registers[hi] = registers[s];
+  hi = registers[s];
 }
 
 void MIPS_sys::mtlo(const int32_t &s){
-  registers[lo] = registers[s];
+  lo = registers[s];
 }
 
 void MIPS_sys::mult(const int32_t &s, const int32_t &t){
@@ -232,13 +232,15 @@ void MIPS_sys::mult(const int32_t &s, const int32_t &t){
   x1 = registers[t];
   x2 = registers[s];
   product = x1 * x2;
-  registers[hi] = product >> 32;
-  registers[lo] = product & 0x00000000FFFFFFFF;
+  hi = product >> 32;
+  lo = product & 0x00000000FFFFFFFF;
 }
 
 void MIPS_sys::multu(const int32_t &s, const int32_t &t){
   uint64_t product;
   product = registers[t] * registers[s];
+  hi = product >> 32;
+  lo = product & 0x00000000FFFFFFFF;
 }
 
 void MIPS_sys::or_(const int32_t &s, const int32_t &t, const int32_t &d){
