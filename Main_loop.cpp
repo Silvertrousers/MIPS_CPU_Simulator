@@ -18,7 +18,7 @@ void display_state(MIPS_sys s);
 bool checker(const instruction &instr, MIPS_sys s);
 
 int main(int argc, char *argv[] ){
-  int print = 0; //argv 2 is a bool that allows printing if true
+  int print = 1; //argv 2 is a bool that allows printing if true
   MIPS_sys s = MIPS_sys(); //define the system initial state
   instruction inst, inst_delay_slot;//inst_ds is reserved for delay slot instructions
   s.ld_inst(argv[1]);

@@ -7,10 +7,23 @@
 //been caused by the jump or branch instruction.
 
 MIPS_sys::MIPS_sys(){
+  byte b;
   pc = 0x10000000; //pc offset respresents index of instruction memory vector;
-
+  hi = 0;
+  lo = 0;
   for(int i=0; i<32; i++){
     registers.push_back(0);
+  }
+  b.val = 0;
+  b.address = 0x30000000;
+
+  for(int i=0; i<4; i++){
+    in_mem.data.push_back(b);
+    b.address ++;
+  }
+  for(int j=0; j<4; j++){
+    out_mem.data.push_back(b);
+    b.address ++;
   }
 }
 
@@ -198,32 +211,32 @@ void MIPS_sys::div(const int32_t &s, const int32_t &t){
   x2 = registers[s];
   quotient = floor(x1/x2);
   remainder = x1 - (x2 * quotient);
-  lo = quotient;
-  hi = remainder;
+  registers[lo] = quotient;
+  registers[hi] = remainder;
 }
 
 void MIPS_sys::divu(const int32_t &s, const int32_t &t){
   uint32_t quotient, remainder;
   quotient = floor(registers[t]/registers[s]);
   remainder = registers[t] - (registers[s] * quotient);
-  lo = quotient;
-  hi = remainder;
+  registers[lo] = quotient;
+  registers[hi] = remainder;
 }
 
 void MIPS_sys::mfhi(const int32_t &d){
-  registers[d] = hi;
+  registers[d] = registers[hi];
 }
 
 void MIPS_sys::mflo(const int32_t &d){
-  registers[d] = lo;
+  registers[d] = registers[lo];
 }
 
 void MIPS_sys::mthi(const int32_t &s){
-  hi = registers[s];
+  registers[hi] = registers[s];
 }
 
 void MIPS_sys::mtlo(const int32_t &s){
-  lo = registers[s];
+  registers[lo] = registers[s];
 }
 
 void MIPS_sys::mult(const int32_t &s, const int32_t &t){
@@ -232,15 +245,13 @@ void MIPS_sys::mult(const int32_t &s, const int32_t &t){
   x1 = registers[t];
   x2 = registers[s];
   product = x1 * x2;
-  hi = product >> 32;
-  lo = product & 0x00000000FFFFFFFF;
+  registers[hi] = product >> 32;
+  registers[lo] = product & 0x00000000FFFFFFFF;
 }
 
 void MIPS_sys::multu(const int32_t &s, const int32_t &t){
   uint64_t product;
   product = registers[t] * registers[s];
-  hi = product >> 32;
-  lo = product & 0x00000000FFFFFFFF;
 }
 
 void MIPS_sys::or_(const int32_t &s, const int32_t &t, const int32_t &d){
@@ -432,13 +443,13 @@ void MIPS_sys::lb(const uint32_t &t, const uint32_t &b, const int &off){
     }
   }
   else if(in_in_mem(offset + base)){
+    in = getchar();
     for(int j=0; j < in_mem.data.size(); j++){
-      if((offset+base) == in_mem.data[j].address){
-        in = getchar();
+      if(in_mem.data[j].address == 0x30000003){
         in_mem.data[j].val = in;
-        if(offset+base == 0x30000004){
-          registers[t] = in_mem.data[j].val;
-        }
+      }
+      if(offset+base == in_mem.data[j].address){
+        registers[t] = sign_extend(in_mem.data[j].val, 8);
       }
     }
   }
@@ -467,13 +478,13 @@ void MIPS_sys::lbu(const uint32_t &t, const uint32_t &b, const int &off){
     }
   }
   else if(in_in_mem(offset+base)){
+    in = getchar();
     for(int j=0; j < in_mem.data.size(); j++){
-      if((offset+base) == in_mem.data[j].address){
-        in = getchar();
-        in_mem.data[j].val = in & 0x000000FF;
-        if(offset+base == 0x30000004){
-          registers[t] = in_mem.data[j].val;
-        }
+      if(in_mem.data[j].address == 0x30000003){
+        in_mem.data[j].val = in;
+      }
+      if(offset+base == in_mem.data[j].address){
+        registers[t] = in_mem.data[j].val;
       }
     }
   }
@@ -485,7 +496,7 @@ void MIPS_sys::lh(const uint32_t &t, const uint32_t &b, const int &offset){
   char in;
   int base = registers[b];
   if(((offset + base) % 2) == 0){
-    if(in_data_mem(offset + base)){
+    if(in_data_mem(offset + base) || in_instruction_mem(offset + base)){
       lb(t, b, offset);
       registers[t] = registers[t] << 8;
       lbu(0, b, offset + 1);
@@ -545,6 +556,7 @@ void MIPS_sys::lhu(const uint32_t &t, const uint32_t &b, const int &offset){
 void MIPS_sys::lui(const uint32_t &t, const uint32_t &i){
   registers[t] =  i << 16;
 }
+
 void MIPS_sys::lw(const uint32_t &t, const uint32_t &b, const int &offset){
   char in;
   int base = registers[b];
