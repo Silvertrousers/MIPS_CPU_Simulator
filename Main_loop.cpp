@@ -48,6 +48,7 @@ int main(int argc, char *argv[] ){
           else{
             checker(inst_delay_slot, s);
             s.instruction_look_up(inst_delay_slot);
+            s.registers[0] = 0;//makes sure r0 is always 0
           }
         }
         checker(inst, s);
