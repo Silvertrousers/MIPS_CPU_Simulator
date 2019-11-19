@@ -34,6 +34,9 @@ void MIPS_sys::increment_pc(const uint32_t &offset){
 void MIPS_sys::ld_inst(const char* filename){
   char* buffer;
   byte temp;
+  temp.val = 0;
+  temp.address = 0;
+
   long size;
   std::ifstream file (filename, std::ios::in|std::ios::binary|std::ios::ate);
   if(file.is_open()){
@@ -554,8 +557,6 @@ void MIPS_sys::lhu(const uint32_t &t, const uint32_t &b, const int &offset){
       }
     }
     else{
-      std::cerr<<"memerrorororoor23456     "<<std::hex<<(base + offset)<<std::endl;
-
       std::exit(-11);
     }
   }
@@ -576,7 +577,7 @@ void MIPS_sys::lw(const uint32_t &t, const uint32_t &b, const int &offset){
   int base = registers[b];
   int temp = registers[1];
   if((offset + base) % 4 ==0){
-    if(in_data_mem(offset + base)){
+    if(in_data_mem(offset + base) || in_instruction_mem(offset + base)){
       lhu(t, b, offset);
       save_data = registers[t] << 16;
       registers[b] = base;
