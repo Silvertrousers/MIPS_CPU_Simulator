@@ -608,15 +608,28 @@ void MIPS_sys::lw(const uint32_t &t, const uint32_t &b, const int &offset){
 }
 //look at diagram and reimpliment
 void MIPS_sys::lwl(const uint32_t &t, const uint32_t &b, const int &offset){
-  int temp = registers [t] & 0x0000FFFF;
+  int temp = registers [t];
   int base = registers[b];
-  lw(t, base, offset);
+  int address = base + sign_extend(offset, 16);
+  int b0, b1, b2, b3;
+  if(address % 4 == 0){}
+  if(address % 4 == 1){}
+  if(address % 4 == 2){}
+  if(address % 4 == 3){}
+
+  lbu(t, b, offset);
   registers[t] = (registers[t] & 0xFFFF0000) | temp;
 }
 //look at diagram and reimpliment
 void MIPS_sys::lwr(const uint32_t &t, const uint32_t &b, const int &offset){
+  int temp = registers [t];
   int base = registers[b];
-  int temp = registers [t] & 0xFFFF0000;
+  int address = base + sign_extend(offset, 16);
+  int b0, b1, b2, b3;
+  if(address % 4 == 0){}
+  if(address % 4 == 1){}
+  if(address % 4 == 2){}
+  if(address % 4 == 3){}
   lw(t, base, offset - 3);
   registers[t] = (registers[t] & 0x0000FFFF) | temp;
 }

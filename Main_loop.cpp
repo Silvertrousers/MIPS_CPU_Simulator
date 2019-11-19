@@ -61,7 +61,7 @@ int main(int argc, char *argv[] ){
   }
   if(print){std::cerr<<"result (lsB of r2): "<<std::hex<<(s.registers[2])<<std::endl;}
   std::exit(s.registers[2] & 0x000000FF);
-  return s.registers[2] & 0x000000FF;
+  return 0;
 }
 
 
