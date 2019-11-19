@@ -1,0 +1,2 @@
+testID: lb_i.bin, Instr: LB, Status: PASS, Author: cyrus, Notes: takes user input correctly, 
+testID: lb_i_zero.bin, Instr: LB, Status: PASS, Author: cyrus, Notes: takes user input correctly and only loads lsB of the mem word, 
