@@ -34,9 +34,6 @@ void MIPS_sys::increment_pc(const uint32_t &offset){
 void MIPS_sys::ld_inst(const char* filename){
   char* buffer;
   byte temp;
-  temp.val = 0;
-  temp.address = 0;
-
   long size;
   std::ifstream file (filename, std::ios::in|std::ios::binary|std::ios::ate);
   if(file.is_open()){
@@ -46,9 +43,15 @@ void MIPS_sys::ld_inst(const char* filename){
     buffer = new char [size];
     file.read (buffer, size);
     file.close();
+
     for(int i=0;i<size;i++){
       temp.val = buffer[i] & 0xFF;
       temp.address = i + 0x10000000;
+      instruction_mem.data.push_back(temp);
+    }
+    temp.val = 0;
+    for(int j=0; j<5; j++){
+      temp.address ++;
       instruction_mem.data.push_back(temp);
     }
   }
@@ -358,10 +361,16 @@ void MIPS_sys::beq(const int &s, const int &t, const int &offset){
   if(registers[s] == registers[t]){
     pc += (sign_extend(offset, 16) << 2);//branch time
   }
+  else{
+    pc += 4;
+  }
 }
 void MIPS_sys::bgez(const uint32_t &s, const int &offset){
   if(static_cast<int>(registers[s]) >= 0){
     pc += (sign_extend(offset, 16) << 2);//branch time
+  }
+  else{
+    pc += 4;
   }
 }
 void MIPS_sys::bgezal(const uint32_t &s, const int &offset){
@@ -372,15 +381,24 @@ void MIPS_sys::bgtz(const uint32_t &s, const int &offset){
   if(static_cast<int>(registers[s]) > 0){
     pc += (sign_extend(offset, 16) << 2);//branch time
   }
+  else{
+    pc += 4;
+  }
 }
 void MIPS_sys::blez(const uint32_t &s, const int &offset){
   if(static_cast<int>(registers[s]) <= 0){
     pc += (sign_extend(offset, 16) << 2);//branch time
   }
+  else{
+    pc += 4;
+  }
 }
 void MIPS_sys::bltz(const uint32_t &s, const int &offset){
   if(static_cast<int>(registers[s]) < 0){
     pc += (sign_extend(offset, 16) << 2);//branch time
+  }
+  else{
+    pc += 4;
   }
 }
 void MIPS_sys::bltzal(const uint32_t &s, const int &offset){
@@ -391,6 +409,9 @@ void MIPS_sys::bltzal(const uint32_t &s, const int &offset){
 void MIPS_sys::bne(const uint32_t &s, const uint32_t &t, const int &offset){
   if(registers[s] != registers[t]){
     pc += (sign_extend(offset, 16) << 2);//branch time
+  }
+  else{
+    pc += 4;
   }
 }
 

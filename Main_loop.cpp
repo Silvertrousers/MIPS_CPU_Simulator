@@ -18,10 +18,11 @@ void display_state(MIPS_sys s);
 bool checker(const instruction &instr, MIPS_sys s);
 
 int main(int argc, char *argv[] ){
-  int print = 0; //argv 2 is a bool that allows printing if true
+  int print = 1; //argv 2 is a bool that allows printing if true
   MIPS_sys s = MIPS_sys(); //define the system initial state
   instruction inst, inst_delay_slot;//inst_ds is reserved for delay slot instructions
   s.ld_inst(argv[1]);
+  int last_instr_addr = s.instruction_mem.data[s.instruction_mem.data.size() - 1].address;
   if(print){
     std::cerr<<*argv[1]<<std::endl;
     display_inst_byte(s);
@@ -33,7 +34,7 @@ int main(int argc, char *argv[] ){
     s.registers[0] = 0;//makes sure r0 is always 0
     s.pc += 4;
     if(s.pc != 0){
-      if((0x10000000 <= s.pc) && (s.pc < 0x11000000)){//checks if pc is looking at correct memory location
+      if((0x10000000 <= s.pc) && (s.pc <= last_instr_addr)){//checks if pc is looking at correct memory location
         inst = instruction(word_conc(s, s.pc)); //look at the instruction at the memory location indicaated by pc
         inst_delay_slot = instruction(word_conc(s, s.pc + 4));
         if(print){
@@ -49,6 +50,8 @@ int main(int argc, char *argv[] ){
             checker(inst_delay_slot, s);
             s.instruction_look_up(inst_delay_slot);
             s.registers[0] = 0;//makes sure r0 is always 0
+
+            if(print){std::cerr<<"delay_slot: "<<std::endl; display_state(s);}
           }
         }
         checker(inst, s);
