@@ -336,13 +336,13 @@ void MIPS_sys::srlv(const int32_t &s, const int32_t &t, const int32_t &d){
 
 void MIPS_sys::sub(const int32_t &s, const int32_t &t, const int32_t &d){
   int32_t x1, x2;
-  x1 = registers[t];
-  x2 = registers[s];
+  x1 = registers[s];
+  x2 = registers[t];
   registers[d] = x1 - x2;
 }
 
 void MIPS_sys::subu(const int32_t &s, const int32_t &t, const int32_t &d){
-  registers[d] = registers[t] - registers[s];
+  registers[d] = registers[s] - registers[t];
 }
 
 void MIPS_sys::xor_(const int32_t &s, const int32_t &t, const int32_t &d){
