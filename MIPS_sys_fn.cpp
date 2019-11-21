@@ -500,7 +500,11 @@ void MIPS_sys::lb(const uint32_t &t, const uint32_t &b, const int &off){
     }
   }
   else if(in_in_mem(offset + base)){
-     in = std::getchar();
+    in = std::getchar();
+    if(ferror(stdin)){
+      std::cerr<<"Woops something went horribly wrong :("<<std::endl;
+      std::exit(-21);
+    }
     for(int j=0; j < in_mem.data.size(); j++){
       if(in_mem.data[j].address == 0x30000003){
         in_mem.data[j].val = in;
@@ -535,6 +539,10 @@ void MIPS_sys::lbu(const uint32_t &t, const uint32_t &b, const int &off){
   }
   else if(in_in_mem(offset+base)){
     in = std::getchar();
+    if(ferror(stdin)){
+      std::cerr<<"Woops something went horribly wrong :("<<std::endl;
+      std::exit(-21);
+    }
     for(int j=0; j < in_mem.data.size(); j++){
       if(in_mem.data[j].address == 0x30000003){
         in_mem.data[j].val = in;
@@ -563,6 +571,10 @@ void MIPS_sys::lh(const uint32_t &t, const uint32_t &b, const int &offset){
     }
     else if(in_in_mem(offset + base)){
        in = std::getchar();
+       if(ferror(stdin)){
+         std::cerr<<"Woops something went horribly wrong :("<<std::endl;
+         std::exit(-21);
+       }
       for(int j=0; j < in_mem.data.size(); j++){
         if(in_mem.data[j].address == 0x30000003){
           in_mem.data[j].val = in;
@@ -600,6 +612,10 @@ void MIPS_sys::lhu(const uint32_t &t, const uint32_t &b, const int &offset){
     }
     else if(in_in_mem(offset + base)){
        in = std::getchar();
+       if(ferror(stdin)){
+         std::cerr<<"Woops something went horribly wrong :("<<std::endl;
+         std::exit(-21);
+       }
       for(int j=0; j < in_mem.data.size(); j++){
         if(in_mem.data[j].address == 0x30000003){
           in_mem.data[j].val = in;
@@ -645,6 +661,10 @@ void MIPS_sys::lw(const uint32_t &t, const uint32_t &b, const int &offset){
     }
     else if(in_in_mem(off + base)){
        in = std::getchar();
+       if(ferror(stdin)){
+         std::cerr<<"Woops something went horribly wrong :("<<std::endl;
+         std::exit(-21);
+       }
       for(int j=0; j < in_mem.data.size(); j++){
         if(in_mem.data[j].address == 0x30000003){
           in_mem.data[j].val = in;
@@ -701,9 +721,17 @@ void MIPS_sys::sb(const uint32_t &t, const uint32_t &b, const int &offset){
     store_b_in_mem(t, base, off);
     if(off + base == 0x30000007){
       std::putchar(static_cast<char>(registers[t] & 0x000000FF));//not a test output
+      if(ferror(stdin)){
+        std::cerr<<"Woops something went horribly wrong :("<<std::endl;
+        std::exit(-21);
+      }
     }
     else{
       std::putchar(0);//not a test output
+      if(ferror(stdin)){
+        std::cerr<<"Woops something went horribly wrong :("<<std::endl;
+        std::exit(-21);
+      }
     }
   }
   else{
@@ -721,9 +749,17 @@ void MIPS_sys::sh(const uint32_t &t, const uint32_t &b, const int &offset){
       store_hw_in_mem(t, base, off);
       if(off + base == 0x30000006){
         std::putchar(static_cast<char>(registers[t] & 0x000000FF));//not a test output
+        if(ferror(stdin)){
+          std::cerr<<"Woops something went horribly wrong :("<<std::endl;
+          std::exit(-21);
+        }
       }
       else{
         std::putchar(0);//not a test output
+        if(ferror(stdin)){
+          std::cerr<<"Woops something went horribly wrong :("<<std::endl;
+          std::exit(-21);
+        }
       }
     }
     else{
@@ -747,6 +783,10 @@ void MIPS_sys::sw(const uint32_t &t, const uint32_t &b, const int &offset){
     }
     else if(in_out_mem(off  + base)){
       std::putchar(registers[t] & 0x000000FF);
+      if(ferror(stdin)){
+        std::cerr<<"Woops something went horribly wrong :("<<std::endl;
+        std::exit(-21);
+      }
     }
     else{
       std::exit(-11);
