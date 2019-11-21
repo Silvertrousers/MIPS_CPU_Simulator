@@ -256,9 +256,12 @@ void MIPS_sys::mtlo(const int32_t &s){
 }
 
 void MIPS_sys::mult(const int32_t &s, const int32_t &t){
+  int32_t i1, i2;
+  i1 = registers[t];
+  i2 = registers[s];
   int64_t product, x1, x2;
-  x1 = registers[t];
-  x2 = registers[s];
+  x1 = i1;
+  x2 = i2;
   product = x1 * x2;
   hi = product >> 32;
   lo = product & 0x00000000FFFFFFFF;
