@@ -244,6 +244,9 @@ bool checker(const instruction &instr, MIPS_sys s){
     case 48: //srlv
       return true;
     case 49: //sub
+      if (s.registers[instr.t] == 0x80000000){
+        std::exit(-10);
+      }
       x1 = s.registers[instr.s];
       x2 = -s.registers[instr.t];
       result = x1 + x2;
