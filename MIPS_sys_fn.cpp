@@ -251,8 +251,7 @@ void MIPS_sys::mtlo(const int32_t &s){
 }
 
 void MIPS_sys::mult(const int32_t &s, const int32_t &t){
-  int64_t product;
-  int x1, x2;
+  int64_t product, x1, x2;
   x1 = registers[t];
   x2 = registers[s];
   product = x1 * x2;
@@ -261,8 +260,10 @@ void MIPS_sys::mult(const int32_t &s, const int32_t &t){
 }
 
 void MIPS_sys::multu(const int32_t &s, const int32_t &t){
-  int64_t product;
-  product = registers[s]*registers[t];
+  uint64_t product, x1, x2;
+  x1 = registers[t];
+  x2 = registers[s];
+  product = x1 * x2;
   hi = product >> 32;
   lo = product & 0x00000000FFFFFFFF;
 }
