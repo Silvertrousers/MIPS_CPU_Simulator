@@ -185,10 +185,10 @@ void instruction::i_type(){
     case 0x00000029:
       instr_no = 38;
       break;
-    case 0x0000000B:
+    case 0x0000000A:
       instr_no = 42;
       break;
-    case 0x0000000A:
+    case 0x0000000B:
       instr_no = 43;
       break;
     case 0x0000002B:
