@@ -131,10 +131,10 @@ bool checker(const instruction &instr, MIPS_sys s){
       x1 = s.registers[instr.s];
       x2 = s.registers[instr.t];
       result = x1 + x2;
-      if (x1 > 0 && x2 > 0 && result < 0){
+      if (x1 > 0 && x2 > 0 && result <= 0){
         std::exit(-10);
       }
-      if (x1 < 0 && x2 < 0 && result > 0){
+      if (x1 < 0 && x2 < 0 && result >= 0){
         std::exit(-10);
       }
       return true;
@@ -142,10 +142,10 @@ bool checker(const instruction &instr, MIPS_sys s){
       x1 = s.registers[instr.s];
       x2 = instr.i;
       result = x1 + x2;
-      if (x1 > 0 && x2 > 0 && result < 0){
+      if (x1 > 0 && x2 > 0 && result <= 0){
         std::exit(-10);
       }
-      if (x1 < 0 && x2 < 0 && result > 0){
+      if (x1 < 0 && x2 < 0 && result >= 0){
         std::exit(-10);
       }
       return true;
@@ -247,23 +247,14 @@ bool checker(const instruction &instr, MIPS_sys s){
       x1 = s.registers[instr.s];
       x2 = -s.registers[instr.t];
       result = x1 + x2;
-      if (x1 > 0 && x2 > 0 && result < 0){
+      if (x1 > 0 && x2 > 0 && result <= 0){
         std::exit(-10);
       }
-      if (x1 < 0 && x2 < 0 && result > 0){
+      if (x1 < 0 && x2 < 0 && result >= 0){
         std::exit(-10);
       }
       return true;
     case 50: //subu
-      x1 = s.registers[instr.s];
-      x2 = -instr.i;
-      result = x1 + x2;
-      if (x1 > 0 && x2 > 0 && result < 0){
-        std::exit(-10);
-      }
-      if (x1 < 0 && x2 < 0 && result > 0){
-        std::exit(-10);
-      }
       return true;
     case 52: //xor
       return true;
