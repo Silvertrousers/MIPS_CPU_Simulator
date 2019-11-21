@@ -220,13 +220,11 @@ void MIPS_sys::div(const int32_t &s, const int32_t &t){
   if (registers[t] != 0){
     int32_t quotient, remainder;
     int32_t x1, x2;
-    x1 = registers[s];
+    x1 = abs(registers[s]);
     x2 = registers[t];
-    float f1 = x1;
-    float f2 = x2;
-    quotient = floor(f1/f2);
+    quotient = floor(x1/x2);
     remainder = x1 - (x2 * quotient);
-    if ((x1 > 0 && x2 < 0) || (x2 > 0 && x1 < 0)){
+    if (registers[s] < 0){
       quotient = -quotient;
       remainder = -remainder;
     }
