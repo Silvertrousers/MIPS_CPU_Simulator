@@ -211,7 +211,7 @@ void MIPS_sys::and_(const int32_t &s, const int32_t &t, const int32_t &d){
 }
 
 void MIPS_sys::andi(const int32_t &s,const int32_t &t, const uint32_t &i){
-  int16_t i1 = i;
+  uint16_t i1 = i;
   int32_t x1 = i1;
   registers[t] = registers[s] & x1;
 }
@@ -285,7 +285,7 @@ void MIPS_sys::or_(const int32_t &s, const int32_t &t, const int32_t &d){
 }
 
 void MIPS_sys::ori(const int32_t &s, const int32_t &t, const uint32_t &i){
-  int16_t i1 = i;
+  uint16_t i1 = i;
   int32_t x1 = i1;
   registers[t] = registers[s] | x1;
 }
@@ -378,7 +378,7 @@ void MIPS_sys::xor_(const int32_t &s, const int32_t &t, const int32_t &d){
 }
 
 void MIPS_sys::xori(const int32_t &s, const int32_t &t, const uint32_t &i){
-  int16_t i1 = i;
+  uint16_t i1 = i;
   int32_t x1 = i1;
   registers[t] = registers[s] ^ x1;
 }
