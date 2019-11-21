@@ -189,14 +189,15 @@ void MIPS_sys::add(const int32_t &s, const int32_t &t, const int32_t &d){
 
 void MIPS_sys::addi(const int32_t &s, const int32_t &t, const uint32_t &i){
   int32_t x1;
-  int16_t x2;
+  int32_t x2;
   x1 = registers[s];
   x2 = i;
   registers[t] = x1 + x2;
 }
 
 void MIPS_sys::addiu(const int32_t &s, const int32_t &t, const uint32_t &i){
-  registers[t] = registers[s] + i;
+  uint32_t x1 = i;
+  registers[t] = registers[s] + x1;
 }
 
 void MIPS_sys::addu(const int32_t &s, const int32_t &t, const int32_t &d){
