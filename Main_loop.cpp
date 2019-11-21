@@ -131,6 +131,7 @@ void display_state(MIPS_sys s){
 bool checker(const instruction &instr, MIPS_sys s){
   int64_t result;
   int32_t x1, x2;
+  int16_t i1;
   if (instr.instr_no == 0){
     std::exit(-12);
   }
@@ -150,7 +151,7 @@ bool checker(const instruction &instr, MIPS_sys s){
       return true;
     case 2: //addi
       x1 = s.registers[instr.s];
-      int16_t i1 = instr.i;
+      i1 = instr.i;
       x2 = i1;
       result = x1 + x2;
       if (x1 > 0 && x2 > 0 && result <= 0){
