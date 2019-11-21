@@ -18,6 +18,8 @@ void display_state(MIPS_sys s);
 bool checker(const instruction &instr, MIPS_sys s);
 
 int main(int argc, char *argv[] ){
+  int pre_branch_pc = 0;
+  int post_branch_pc = 0;
   int print = 0; //argv 2 is a bool that allows printing if true
   MIPS_sys s = MIPS_sys(); //define the system initial state
   instruction inst, inst_delay_slot;//inst_ds is reserved for delay slot instructions
@@ -47,15 +49,23 @@ int main(int argc, char *argv[] ){
             std::exit(-13);//-13 exit code says that there was a double jump
           }
           else{
+            pre_branch_pc = s.pc;
+            checker(inst, s);
+            s.instruction_look_up(inst);
+            post_branch_pc = s.pc;
+            s.pc = pre_branch_pc;
             checker(inst_delay_slot, s);
             s.instruction_look_up(inst_delay_slot);
+            s.pc = post_branch_pc;
             s.registers[0] = 0;//makes sure r0 is always 0
 
             if(print){std::cerr<<"delay_slot: "<<std::endl; display_state(s);}
           }
         }
-        checker(inst, s);
-        s.instruction_look_up(inst);
+        else{
+          checker(inst, s);
+          s.instruction_look_up(inst);
+        }
       }
       else{
         std::exit(-11);//if pc goes too high, return memory error since trying to execute from wrong part of mem
