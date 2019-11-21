@@ -11,6 +11,94 @@ then
 else
     echo "r0_test.bin, N/A, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
+OUTPUT=$(./bin/mips_simulator "test_binaries/multu_bt.bin")
+if test $? = 6
+then
+    echo "multu_bt.bin, MULTU, PASS, Drakvor (Garham Amos Kwon), multiplication successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "multu_bt.bin, MULTU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
+OUTPUT=$(./bin/mips_simulator "test_binaries/mult_lg.bin")
+if test $? = 16
+then
+    echo "mult_ng.bin, MULT, PASS, Drakvor (Garham Amos Kwon), multiplication successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "mult_ng.bin, MULT, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
+OUTPUT=$(./bin/mips_simulator "test_binaries/div_ng_1.bin")
+if test $? = 254
+then
+    echo "div_ng_1.bin, DIV, PASS, Drakvor (Garham Amos Kwon), division successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "div_ng_2.bin, DIV, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
+OUTPUT=$(./bin/mips_simulator "test_binaries/div_ng_2.bin")
+if test $? = 2
+then
+    echo "div_ng_2.bin, DIV, PASS, Drakvor (Garham Amos Kwon), division successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "div_ng_2.bin, DIV, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
+OUTPUT=$(./bin/mips_simulator "test_binaries/div_rm.bin")
+if test $? = 2
+then
+    echo "div_rm.bin, DIV, PASS, Drakvor (Garham Amos Kwon), division successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "div_rm.bin, DIV, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
+OUTPUT=$(./bin/mips_simulator "test_binaries/sltu_bt.bin")
+if test $? = 1
+then
+    echo "sltu_bt.bin, SLTU, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "sltu_bt.bin, SLTU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
+OUTPUT=$(./bin/mips_simulator "test_binaries/sll_ov.bin")
+if test $? = 0
+then
+    echo "sll_ov.bin, SLL, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "sll_ov.bin, SLL, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
+OUTPUT=$(./bin/mips_simulator "test_binaries/addiu_ng.bin")
+if test $? = 0
+then
+    echo "addiu_ng.bin, ADDIU, PASS, Drakvor (Garham Amos Kwon), addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "addiu_ng.bin, ADDIU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
+OUTPUT=$(./bin/mips_simulator "test_binaries/div_zr.bin")
+if test $? = 0
+then
+    echo "div_zr.bin, ADDIU, PASS, Drakvor (Garham Amos Kwon), division successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "div_zr.bin, ADDIU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
+OUTPUT=$(./bin/mips_simulator "test_binaries/srav_lg.bin")
+if test $? = 0
+then
+    echo "srav_lg.bin, ADDIU, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "srav_lg.bin, ADDIU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
+OUTPUT=$(./bin/mips_simulator "test_binaries/add_nj.bin")
+if test $? = 0
+then
+    echo "add_nj.bin, ADDIU, PASS, Drakvor (Garham Amos Kwon), Integer Overflow Exception, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "add_nj.bin, ADDIU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
 OUTPUT=$(./bin/mips_simulator "test_binaries/invalid.bin")
 if test $? = 244
 then
