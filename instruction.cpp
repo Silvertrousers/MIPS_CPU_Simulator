@@ -81,7 +81,7 @@ void instruction::r_type(){
     case 0x0000002A:
       instr_no = 41;
       break;
-    case 0x00000029:
+    case 0x0000002B:
       instr_no = 44;
       break;
     case 0x00000003:
