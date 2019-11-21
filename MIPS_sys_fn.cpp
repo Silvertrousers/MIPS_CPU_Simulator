@@ -212,6 +212,9 @@ void MIPS_sys::andi(const int32_t &s,const int32_t &t, const uint32_t &i){
 }
 
 void MIPS_sys::div(const int32_t &s, const int32_t &t){
+  if (registers[s] == 0){
+    return 0;
+  }
   int32_t quotient, remainder;
   int32_t x1, x2;
   x1 = registers[t];
@@ -223,6 +226,9 @@ void MIPS_sys::div(const int32_t &s, const int32_t &t){
 }
 
 void MIPS_sys::divu(const int32_t &s, const int32_t &t){
+  if (registers[s] == 0){
+    return 0;
+  }
   uint32_t quotient, remainder;
   quotient = floor(registers[t]/registers[s]);
   remainder = registers[t] - (registers[s] * quotient);
