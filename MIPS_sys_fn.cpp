@@ -222,8 +222,14 @@ void MIPS_sys::div(const int32_t &s, const int32_t &t){
     int32_t x1, x2;
     x1 = registers[s];
     x2 = registers[t];
-    quotient = floor(x1/x2);
+    float f1 = x1;
+    float f2 = x2;
+    quotient = floor(f1/f2);
     remainder = x1 - (x2 * quotient);
+    if ((x1 > 0 && x2 < 0) || (x2 > 0 && x1 < 0)){
+      quotient = -quotient;
+      remainder = -remainder;
+    }
     lo = quotient;
     hi = remainder;
   }
