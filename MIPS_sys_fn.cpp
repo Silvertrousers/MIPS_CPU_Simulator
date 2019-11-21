@@ -654,10 +654,10 @@ void MIPS_sys::lwl(const uint32_t &t, const uint32_t &b, const int &offset){
   int address = base + sign_extend(offset, 16);
   int off = sign_extend(offset, 16) & 0xFFFC;
   lw(t, b, off);
-  if(address % 4 == 3){}
-  if(address % 4 == 2){registers[t] = ((registers[t] << 8) + (temp & 0x000000FF));}
-  if(address % 4 == 1){registers[t] = ((registers[t] << 16) + (temp & 0x0000FFFF));}
-  if(address % 4 == 0){registers[t] = ((registers[t] << 24) + (temp & 0x00FFFFFF));}
+  if(address % 4 == 0){}
+  if(address % 4 == 1){registers[t] = ((registers[t] << 8) + (temp & 0x000000FF));}
+  if(address % 4 == 2){registers[t] = ((registers[t] << 16) + (temp & 0x0000FFFF));}
+  if(address % 4 == 3){registers[t] = ((registers[t] << 24) + (temp & 0x00FFFFFF));}
 }
 //look at diagram and reimpliment
 void MIPS_sys::lwr(const uint32_t &t, const uint32_t &b, const int &offset){
@@ -666,10 +666,10 @@ void MIPS_sys::lwr(const uint32_t &t, const uint32_t &b, const int &offset){
   int address = base + sign_extend(offset, 16);
   int off = sign_extend(offset, 16) & 0xFFFC;
   lw(t, b, off);
-  if(address % 4 == 3){registers[t] = ((registers[t] >> 24) + (temp & 0xFFFFFF00));}
-  if(address % 4 == 2){registers[t] = ((registers[t] >> 16) + (temp & 0xFFFF0000));}
-  if(address % 4 == 1){registers[t] = ((registers[t] >> 8) + (temp & 0xFF000000));}
-  if(address % 4 == 0){}
+  if(address % 4 == 0){registers[t] = ((registers[t] >> 24) + (temp & 0xFFFFFF00));}
+  if(address % 4 == 1){registers[t] = ((registers[t] >> 16) + (temp & 0xFFFF0000));}
+  if(address % 4 == 2){registers[t] = ((registers[t] >> 8) + (temp & 0xFF000000));}
+  if(address % 4 == 3){}
 }
 void MIPS_sys::sb(const uint32_t &t, const uint32_t &b, const int &offset){
   int base = registers[b];
