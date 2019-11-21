@@ -695,7 +695,12 @@ void MIPS_sys::sb(const uint32_t &t, const uint32_t &b, const int &offset){
   }
   else if(in_out_mem(off + base)){
     store_b_in_mem(t, base, off);
-    std::putchar(static_cast<char>(registers[t] & 0x000000FF));//not a test output
+    if(off + base == 0x30000007){
+      std::putchar(static_cast<char>(registers[t] & 0x000000FF));//not a test output
+    }
+    else{
+      std::putchar(0);//not a test output
+    }
   }
   else{
     std::exit(-11);
@@ -709,7 +714,13 @@ void MIPS_sys::sh(const uint32_t &t, const uint32_t &b, const int &offset){
       store_hw_in_mem(t, base, off );
     }
     else if(in_out_mem(off  + base)){
-      std::putchar(registers[t] & 0x000000FF);;
+      store_hw_in_mem(t, base, off);
+      if(off + base == 0x30000006){
+        std::putchar(static_cast<char>(registers[t] & 0x000000FF));//not a test output
+      }
+      else{
+        std::putchar(0);//not a test output
+      }
     }
     else{
       std::exit(-11);
