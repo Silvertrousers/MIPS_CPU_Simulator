@@ -188,15 +188,17 @@ void MIPS_sys::add(const int32_t &s, const int32_t &t, const int32_t &d){
 }
 
 void MIPS_sys::addi(const int32_t &s, const int32_t &t, const uint32_t &i){
+  int16_t i1 = i;
   int32_t x1;
   int32_t x2;
   x1 = registers[s];
-  x2 = i;
+  x2 = i1;
   registers[t] = x1 + x2;
 }
 
 void MIPS_sys::addiu(const int32_t &s, const int32_t &t, const uint32_t &i){
-  uint32_t x1 = i;
+  int16_t i1 = i;
+  uint32_t x1 = i1;
   registers[t] = registers[s] + x1;
 }
 
@@ -209,7 +211,9 @@ void MIPS_sys::and_(const int32_t &s, const int32_t &t, const int32_t &d){
 }
 
 void MIPS_sys::andi(const int32_t &s,const int32_t &t, const uint32_t &i){
-  registers[t] = registers[s] & i;
+  int16_t i1 = i;
+  int32_t x1 = i1;
+  registers[t] = registers[s] & x1;
 }
 
 void MIPS_sys::div(const int32_t &s, const int32_t &t){
@@ -274,7 +278,9 @@ void MIPS_sys::or_(const int32_t &s, const int32_t &t, const int32_t &d){
 }
 
 void MIPS_sys::ori(const int32_t &s, const int32_t &t, const uint32_t &i){
-  registers[t] = registers[s] | i;
+  int16_t i1 = i;
+  int32_t x1 = i1;
+  registers[t] = registers[s] | x1;
 }
 
 void MIPS_sys::sll(const int32_t &t, const int32_t &d, const uint32_t &shamt){
@@ -298,7 +304,8 @@ void MIPS_sys::slt(const int32_t &s, const int32_t &t, const int32_t &d){
 }
 
 void MIPS_sys::slti(const int32_t &s, const int32_t &t, const uint32_t &i){
-  int16_t x1 = i;
+  int16_t i1 = i;
+  int32_t x1 = i1;
   if (registers[s] < x1){
     registers[t] = 1;
   }
@@ -308,7 +315,9 @@ void MIPS_sys::slti(const int32_t &s, const int32_t &t, const uint32_t &i){
 }
 
 void MIPS_sys::sltiu(const int32_t &s, const int32_t &t, const uint32_t &i){
-  if (registers[s] < i){
+  int16_t i1 = i;
+  uint32_t x1 = i1;
+  if (registers[s] < x1){
     registers[t] = 1;
   }
   else{
@@ -359,7 +368,9 @@ void MIPS_sys::xor_(const int32_t &s, const int32_t &t, const int32_t &d){
 }
 
 void MIPS_sys::xori(const int32_t &s, const int32_t &t, const uint32_t &i){
-  registers[t] = registers[s] ^ i;
+  int16_t i1 = i;
+  int32_t x1 = i1;
+  registers[t] = registers[s] ^ x1;
 }
 
 
