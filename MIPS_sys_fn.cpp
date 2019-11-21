@@ -212,22 +212,26 @@ void MIPS_sys::andi(const int32_t &s,const int32_t &t, const uint32_t &i){
 }
 
 void MIPS_sys::div(const int32_t &s, const int32_t &t){
-  int32_t quotient, remainder;
-  int32_t x1, x2;
-  x1 = registers[t];
-  x2 = registers[s];
-  quotient = floor(x1/x2);
-  remainder = x1 - (x2 * quotient);
-  registers[lo] = quotient;
-  registers[hi] = remainder;
+  if (registers[s] != 0){
+    int32_t quotient, remainder;
+    int32_t x1, x2;
+    x1 = registers[t];
+    x2 = registers[s];
+    quotient = floor(x1/x2);
+    remainder = x1 - (x2 * quotient);
+    lo = quotient;
+    hi = remainder;
+  }
 }
 
 void MIPS_sys::divu(const int32_t &s, const int32_t &t){
-  uint32_t quotient, remainder;
-  quotient = floor(registers[t]/registers[s]);
-  remainder = registers[t] - (registers[s] * quotient);
-  registers[lo] = quotient;
-  registers[hi] = remainder;
+  if (registers[s] != 0){
+    uint32_t quotient, remainder;
+    quotient = floor(registers[t]/registers[s]);
+    remainder = registers[t] - (registers[s] * quotient);
+    lo = quotient;
+    hi = remainder;
+  }
 }
 
 void MIPS_sys::mfhi(const int32_t &d){
@@ -252,13 +256,15 @@ void MIPS_sys::mult(const int32_t &s, const int32_t &t){
   x1 = registers[t];
   x2 = registers[s];
   product = x1 * x2;
-  registers[hi] = product >> 32;
-  registers[lo] = product & 0x00000000FFFFFFFF;
+  hi = product >> 32;
+  lo = product & 0x00000000FFFFFFFF;
 }
 
 void MIPS_sys::multu(const int32_t &s, const int32_t &t){
-  uint64_t product;
-  product = registers[t] * registers[s];
+  int64_t product;
+  product = registers[s]*registers[t];
+  hi = product >> 32;
+  lo = product & 0x00000000FFFFFFFF;
 }
 
 void MIPS_sys::or_(const int32_t &s, const int32_t &t, const int32_t &d){
@@ -622,7 +628,6 @@ void MIPS_sys::lw(const uint32_t &t, const uint32_t &b, const int &offset){
     }
     else if(in_in_mem(off + base)){
        in = std::getchar();
-       std::cerr<<static_cast<int>(in)<<std::endl;
       for(int j=0; j < in_mem.data.size(); j++){
         if(in_mem.data[j].address == 0x30000003){
           in_mem.data[j].val = in;
@@ -677,7 +682,6 @@ void MIPS_sys::sb(const uint32_t &t, const uint32_t &b, const int &offset){
   }
   else if(in_out_mem(off + base)){
     store_b_in_mem(t, base, off);
-    std::cerr<<"yeeee: "<<(registers[t])<<std::endl;
     std::putchar(static_cast<char>(registers[t] & 0x000000FF));//not a test output
   }
   else{
@@ -687,7 +691,6 @@ void MIPS_sys::sb(const uint32_t &t, const uint32_t &b, const int &offset){
 void MIPS_sys::sh(const uint32_t &t, const uint32_t &b, const int &offset){
   int base = registers[b];
   int off = sign_extend(offset, 16);
-  std::cerr<<"address:  "<<(off+base)<<std::endl;
   if((off  + base)%2 == 0){
     if(in_data_mem(off +base)){
       store_hw_in_mem(t, base, off );
