@@ -150,7 +150,8 @@ bool checker(const instruction &instr, MIPS_sys s){
       return true;
     case 2: //addi
       x1 = s.registers[instr.s];
-      x2 = instr.i;
+      int16_t i1 = instr.i;
+      x2 = i1;
       result = x1 + x2;
       if (x1 > 0 && x2 > 0 && result <= 0){
         std::exit(-10);
