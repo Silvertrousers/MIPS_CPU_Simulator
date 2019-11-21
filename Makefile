@@ -14,6 +14,7 @@ Main_loop.o: Main_loop.cpp
 	g++ -c Main_loop.cpp
 
 testbench:
+	chmod u+x bin/mips_testbench
 	./bin/mips_testbench
 
 clean:
