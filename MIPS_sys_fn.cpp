@@ -309,7 +309,8 @@ void MIPS_sys::slt(const int32_t &s, const int32_t &t, const int32_t &d){
 void MIPS_sys::slti(const int32_t &s, const int32_t &t, const uint32_t &i){
   int16_t i1 = i;
   int32_t x1 = i1;
-  if (registers[s] < x1){
+  int32_t x2 = registers[s];
+  if (x2 < x1){
     registers[t] = 1;
   }
   else{
