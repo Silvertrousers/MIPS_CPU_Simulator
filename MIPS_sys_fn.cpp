@@ -323,10 +323,8 @@ void MIPS_sys::sra(const int32_t &t, const int32_t &d, const uint32_t &shamt){
   registers[d] = x1 >> shamt;
 }
 
-void MIPS_sys::srav(const int32_t &t, const int32_t &d, const uint32_t &shamt){
-  int32_t x1;
-  x1 = registers[t];
-  registers[d] = x1 >> shamt;
+void MIPS_sys::srav(const int32_t &s, const int32_t &t, const uint32_t &d){
+  registers[d] = registers[t] >> registers[s];
 }
 
 void MIPS_sys::srl(const int32_t &t, const int32_t &d, const uint32_t &shamt){
