@@ -79,7 +79,7 @@ void MIPS_sys::instruction_look_up(const instruction &instr){
       break;
     case 5: and_(instr.s, instr.t, instr.d);
       break;
-    case 6: andi(instr.s, instr.t, instr.d);
+    case 6: andi(instr.s, instr.t, instr.i);
       break;
     case 7: beq(instr.s, instr.t, instr.i);
       break;
