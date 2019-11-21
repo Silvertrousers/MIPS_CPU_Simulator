@@ -139,7 +139,7 @@ void MIPS_sys::instruction_look_up(const instruction &instr){
       break;
     case 35: or_(instr.s, instr.t, instr.d);
       break;
-    case 36: ori(instr.s, instr.t, instr.d);
+    case 36: ori(instr.s, instr.t, instr.i);
       break;
     case 37: sb(instr.t, instr.s, instr.i);
       break;
