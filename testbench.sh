@@ -1,6 +1,233 @@
 #!/bin/bash
 dt="_$(date +%d.%m.%Y_%H:%M:%S).txt"
 touch ./test/output/"$dt"
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/r0_test.bin")
+# if test $? = 1
+# then
+#     echo "testID: r0_test.bin, Instr: N/A, Status: PASS, Author: $USER, Notes: r0 remains unmodified as it should, " | paste -sd ' ' >> ./test/output/"$dt"
+# elif test $? = 6
+# then
+#     echo "testID: r0_test.bin, Instr: N/A, Status: FAIL, Author: $USER, Notes: r0 was modified to 5, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: r0_test.bin, Instr: N/A, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/invalid.bin")
+# if test $? = 244
+# then
+#     echo "testID: invalid.bin, Instr: N/A, Status: PASS, Author: $USER, Notes: Invalid Instruction Exception, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: invalid.bin, Instr: N/A, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/add_bt.bin")
+# if test $? = 3
+# then
+#     echo "testID: add_bt.bin, Instr: ADD, Status: PASS, Author: $USER, Notes: addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: add_bt.bin, Instr: ADD, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/add_ov.bin")
+# if test $? = 246
+# then
+#     echo "testID: add_ov.bin, Instr: ADD, Status: PASS, Author: $USER, Notes: Integer Overflow Exception, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: add_ov.bin, Instr: ADD, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/addi_bt.bin")
+# if test $? = 2
+# then
+#     echo "testID: addi_bt.bin, Instr: ADDI, Status: PASS, Author: $USER, Notes: addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: addi_bt.bin, Instr: ADDI, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/addi_ov.bin")
+# if test $? = 246
+# then
+#     echo "testID: addi_ov.bin, Instr: ADDI, Status: PASS, Author: $USER, Notes: Integer Overflow Exception, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: addi_ov.bin, Instr: ADDI, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/addiu_bt.bin")
+# if test $? = A
+# then
+#     echo "testID: addiu_bt.bin, Instr: ADDIU, Status: PASS, Author: $USER, Notes: addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: addiu_bt.bin, Instr: ADDIU, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/addu_bt.bin")
+# if test $? = 5
+# then
+#     echo "testID: addu_bt.bin, Instr: ADDU, Status: PASS, Author: $USER, Notes: addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: addu_bt.bin, Instr: ADDU, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/and_bt.bin")
+# if test $? = 170
+# then
+#     echo "testID: and_bt.bin, Instr: AND, Status: PASS, Author: $USER, Notes: operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: and_bt.bin, Instr: AND, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/andi_bt.bin")
+# if test $? = 170
+# then
+#     echo "testID: andi_bt.bin, Instr: ANDI, Status: PASS, Author: $USER, Notes: addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: andi_bt.bin, Instr: ANDI, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/or_bt.bin")
+# if test $? = 170
+# then
+#     echo "testID: or_bt.bin, Instr: OR, Status: PASS, Author: $USER, Notes: operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: or_bt.bin, Instr: OR, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/ori_bt.bin")
+# if test $? = 170
+# then
+#     echo "testID: ori_bt.bin, Instr: ORI, Status: PASS, Author: $USER, Notes: addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: ori_bt.bin, Instr: ORI, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/xor_bt.bin")
+# if test $? = 85
+# then
+#     echo "testID: xor_bt.bin, Instr: XOR, Status: PASS, Author: $USER, Notes: operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: xor_bt.bin, Instr: XOR, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/xori_bt.bin")
+# if test $? = 170
+# then
+#     echo "testID: xori_bt.bin, Instr: XORI, Status: PASS, Author: $USER, Notes: addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: xori_bt.bin, Instr: XORI, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/sub_bt.bin")
+# if test $? = 3
+# then
+#     echo "testID: sub_bt.bin, Instr: SUB, Status: PASS, Author: $USER, Notes: subtraction successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: sub_bt.bin, Instr: SUB, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/sub_ov.bin")
+# if test $? = 246
+# then
+#     echo "testID: sub_ov.bin, Instr: SUB, Status: PASS, Author: $USER, Notes: Integer Overflow Exception, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: sub_ov.bin, Instr: SUB, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/subu_bt.bin")
+# if test $? = 3
+# then
+#     echo "testID: subu_bt.bin, Instr: SUBU, Status: PASS, Author: $USER, Notes: subtraction successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: subu_bt.bin, Instr: SUBU, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/sll_bt.bin")
+# if test $? = 2
+# then
+#     echo "testID: sll_bt.bin, Instr: SLL, Status: PASS, Author: $USER, Notes: operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: sll_bt.bin, Instr: SLL, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/sllv_bt.bin")
+# if test $? = 8
+# then
+#     echo "testID: sllv_bt.bin, Instr: SLLV, Status: PASS, Author: $USER, Notes: operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: sllv_bt.bin, Instr: SLLV, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/sra_bt.bin")
+# if test $? = 255
+# then
+#     echo "testID: sra_bt.bin, Instr: SRA, Status: PASS, Author: $USER, Notes: operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: sra_bt.bin, Instr: SRA, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/srav_bt.bin")
+# if test $? = 255
+# then
+#     echo "testID: srav_bt.bin, Instr: SRAV, Status: PASS, Author: $USER, Notes: operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: srav_bt.bin, Instr: SRAV, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/srl_bt.bin")
+# if test $? = 2
+# then
+#     echo "testID: srl_bt.bin, Instr: SRL, Status: PASS, Author: $USER, Notes: operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: srl_bt.bin, Instr: SRL, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/srlv_bt.bin")
+# if test $? = 1
+# then
+#     echo "testID: srlv_bt.bin, Instr: SRLV, Status: PASS, Author: $USER, Notes: operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: srlv_bt.bin, Instr: SRLV, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/slt_bt.bin")
+# if test $? = 1
+# then
+#     echo "testID: slt_bt.bin, Instr: SLT, Status: PASS, Author: $USER, Notes: operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: slt_bt.bin, Instr: SLT, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/slti_bt.bin")
+# if test $? = 0
+# then
+#     echo "testID: slti_bt.bin, Instr: SLTI, Status: PASS, Author: $USER, Notes: operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: slti_bt.bin, Instr: SLTI, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/sltiu_bt.bin")
+# if test $? = 1
+# then
+#     echo "testID: sltiu_bt.bin, Instr: SLTIU, Status: PASS, Author: $USER, Notes: operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: sltiu_bt.bin, Instr: SLTIU, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/mthi_mfhi_bt.bin")
+# if test $? = 2
+# then
+#     echo "testID: mthi_mfhi_bt.bin, Instr: MTHI/MFHI, Status: PASS, Author: $USER, Notes: operations successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: mthi_mfhi_bt.bin, Instr: MTHI/MFHI, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+# OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/mtlo_mflo_bt.bin")
+# if test $? = 7
+# then
+#     echo "testID: mtlo_mflo_bt.bin, Instr: MTLO/MFLO, Status: PASS, Author: $USER, Notes: operations successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+# else
+#     echo "testID: mtlo_mflo_bt.bin, Instr: MTLO/MFLO, Status: FAIL, Author: $USER, Notes: operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+# fi
+
+
 # OUTPUT=$(sudo ./bin/mips_simulator "test_binaries/harsh_r0_test.bin")
 # if test $? = 1
 # then
