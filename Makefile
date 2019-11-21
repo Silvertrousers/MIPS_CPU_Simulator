@@ -14,7 +14,7 @@ Main_loop.o: Main_loop.cpp
 	g++ -c Main_loop.cpp
 
 testbench:
-	./testbench.sh
+	./bin/mips_testbench
 
 clean:
 	rm *.o bin/mips_simulator
