@@ -219,12 +219,13 @@ void MIPS_sys::andi(const int32_t &s,const int32_t &t, const uint32_t &i){
 void MIPS_sys::div(const int32_t &s, const int32_t &t){
   if (registers[t] != 0){
     int32_t quotient, remainder;
-    int32_t x1, x2;
+    int32_t x1, x2, x3;
     x1 = abs(registers[s]);
     x2 = registers[t];
+    x3 = registers[s];
     quotient = floor(x1/x2);
     remainder = x1 - (x2 * quotient);
-    if (registers[s] < 0){
+    if (x3 < 0){
       quotient = -quotient;
       remainder = -remainder;
     }
@@ -324,7 +325,8 @@ void MIPS_sys::slti(const int32_t &s, const int32_t &t, const uint32_t &i){
 
 void MIPS_sys::sltiu(const int32_t &s, const int32_t &t, const uint32_t &i){
   int16_t i1 = i;
-  uint32_t x1 = i1;
+  int32_t i2 = i1;
+  uint32_t x1 = i2;
   if (registers[s] < x1){
     registers[t] = 1;
   }
