@@ -558,6 +558,7 @@ else
     echo "lbu_ov.bin, LBU, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't catch trying to load out of range mem, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 OUTPUT=$(./bin/mips_simulator "test_binaries/lb_bt.bin")
+echo $?
 if test $? = 240
 then
     echo "lb_bt.bin, LB, PASS, Silvertrousers (Cyrus Goodarzi), loads correct byte with sign extension, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -636,7 +637,6 @@ then
 else
     echo "lh_ov.bin, LH, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't catch trying to load out of range mem, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/sb_o.bin") #broken still
 
 OUTPUT=$(./bin/mips_simulator "test_binaries/lui_bt.bin")
 if test $? = 1
@@ -687,6 +687,109 @@ then
 else
     echo "lw_ov.bin, LW, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't catch trying to load out of range mem, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
+
+OUTPUT=$(./bin/mips_simulator "test_binaries/lwl0_bt.bin")
+if test $? = 4
+then
+    echo "lwl0_bt.bin, LWL, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "lwl0_bt.bin, LWL, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+OUTPUT=$(./bin/mips_simulator "test_binaries/lwl1_bt.bin")
+if test $? = 4
+then
+    echo "lwl1_bt.bin, LWL, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "lwl1_bt.bin, LWL, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+OUTPUT=$(./bin/mips_simulator "test_binaries/lwl2_bt.bin")
+if test $? = 4
+then
+    echo "lwl2_bt.bin, LWL, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "lwl2_bt.bin, LWL, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+OUTPUT=$(./bin/mips_simulator "test_binaries/lwl3_bt.bin")
+if test $? = 4
+then
+    echo "lwl3_bt.bin, LWL, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "lwl3_bt.bin, LWL, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
+OUTPUT=$(./bin/mips_simulator "test_binaries/lwl1_original.bin")
+if test $? = 8
+then
+    echo "lwl1_original.bin, LWL, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "lwl1_original.bin, LWL, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+OUTPUT=$(./bin/mips_simulator "test_binaries/lwl2_original.bin")
+if test $? = 7
+then
+    echo "lwl2_original.bin, LWL, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "lwl2_original.bin, LWL, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+OUTPUT=$(./bin/mips_simulator "test_binaries/lwl3_original.bin")
+if test $? = 6
+then
+    echo "lwl3_original.bin, LWL, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "lwl3_original.bin, LWL, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+OUTPUT=$(./bin/mips_simulator "test_binaries/lwr0_bt.bin")
+if test $? = 1
+then
+    echo "lwr0_bt.bin, LWR, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "lwr0_bt.bin, LWR, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+OUTPUT=$(./bin/mips_simulator "test_binaries/lwr1_bt.bin")
+if test $? = 1
+then
+    echo "lwr1_bt.bin, LWR, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "lwr1_bt.bin, LWR, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+OUTPUT=$(./bin/mips_simulator "test_binaries/lwr2_bt.bin")
+if test $? = 1
+then
+    echo "lwr2_bt.bin, LWR, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "lwr2_bt.bin, LWR, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+OUTPUT=$(./bin/mips_simulator "test_binaries/lwr3_bt.bin")
+if test $? = 1
+then
+    echo "lwr3_bt.bin, LWR, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "lwr3_bt.bin, LWR, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
+OUTPUT=$(./bin/mips_simulator "test_binaries/lwr0_original.bin")
+if test $? = 7
+then
+    echo "lwr0_original.bin, LWR, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "lwr0_original.bin, LWR, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+OUTPUT=$(./bin/mips_simulator "test_binaries/lwr1_original.bin")
+if test $? = 6
+then
+    echo "lwr1_original.bin, LWR, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "lwr1_original.bin, LWR, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+OUTPUT=$(./bin/mips_simulator "test_binaries/lwr2_original.bin")
+if test $? = 5
+then
+    echo "lwr2_original.bin, LWR, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "lwr2_original.bin, LWR, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
+
 OUTPUT=$(./bin/mips_simulator "test_binaries/sb_bt.bin")
 if test $? = 64
 then
@@ -697,19 +800,6 @@ then
 else
     echo "sb_bt.bin, SB, FAIL, Silvertrousers (Cyrus Goodarzi), stores wrong part of the word and/or put it in wrong place in mem, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-
-
-OUTPUT=$(./bin/mips_simulator "test_binaries/sb_o.bin")
-if test $? = 64
-then
-    echo "sb_o.bin, SB, PASS, Silvertrousers (Cyrus Goodarzi), stores right part of word and puts it in the right place in mem, " | paste -sd ' ' >> ./test/output/"$dt"
-elif test $? = 48
-then
-    echo "sb_o.bin, SB, FAIL, Silvertrousers (Cyrus Goodarzi), stores wrong part of the word but put it in right place in mem, " | paste -sd ' ' >> ./test/output/"$dt"
-else
-    echo "sb_o.bin, SB, FAIL, Silvertrousers (Cyrus Goodarzi), stores wrong part of the word and/or put it in wrong place in mem, " | paste -sd ' ' >> ./test/output/"$dt"
-fi
-
 
 OUTPUT=$(./bin/mips_simulator "test_binaries/sb_ov.bin")
 if test $? = 245
@@ -767,5 +857,4 @@ then
 else
     echo "sw_ov.bin, SW, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't catch trying to load out of range mem, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-
 cat ./test/output/"$dt"
