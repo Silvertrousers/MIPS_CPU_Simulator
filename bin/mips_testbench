@@ -1,7 +1,7 @@
 #!/bin/bash
 dt="_$(date +%d.%m.%Y_%H:%M:%S).txt"
 touch ./test/output/"$dt"
-OUTPUT=$(./bin/mips_simulator "test_binaries/r0_test.bin")
+OUTPUT=$($1 "test_binaries/r0_test.bin")
 if test $? = 1
 then
     echo "r0_test.bin, N/A, PASS, Drakvor (Garham Amos Kwon), r0 remains unmodified as it should, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -11,7 +11,7 @@ then
 else
     echo "r0_test.bin, N/A, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/invalid.bin")
+OUTPUT=$($1 "test_binaries/invalid.bin")
 if test $? = 244
 then
     echo "invalid.bin, N/A, PASS, Drakvor (Garham Amos Kwon), Invalid Instruction Exception, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -19,7 +19,7 @@ else
     echo "invalid.bin, N/A, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/mult_bt.bin")
+OUTPUT=$($1 "test_binaries/mult_bt.bin")
 if test $? = 6
 then
     echo "mult_bt.bin, MULT, PASS, Drakvor (Garham Amos Kwon), multiplication successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -27,7 +27,7 @@ else
     echo "mult_bt.bin, MULT, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/multu_bt.bin")
+OUTPUT=$($1 "test_binaries/multu_bt.bin")
 if test $? = 6
 then
     echo "multu_bt.bin, MULTU, PASS, Drakvor (Garham Amos Kwon), multiplication successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -35,7 +35,7 @@ else
     echo "multu_bt.bin, MULTU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/mult_lg.bin")
+OUTPUT=$($1 "test_binaries/mult_lg.bin")
 if test $? = 255
 then
     echo "mult_lg.bin, MULT, PASS, Drakvor (Garham Amos Kwon), multiplication successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -43,7 +43,7 @@ else
     echo "mult_lg.bin, MULT, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/mult_ng.bin")
+OUTPUT=$($1 "test_binaries/mult_ng.bin")
 if test $? = 16
 then
     echo "mult_ng.bin, MULT, PASS, Drakvor (Garham Amos Kwon), multiplication successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -51,7 +51,7 @@ else
     echo "mult_ng.bin, MULT, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/div_ng_1.bin")
+OUTPUT=$($1 "test_binaries/div_ng_1.bin")
 if test $? = 254
 then
     echo "div_ng_1.bin, DIV, PASS, Drakvor (Garham Amos Kwon), division successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -59,7 +59,7 @@ else
     echo "div_ng_1.bin, DIV, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/div_ng_2.bin")
+OUTPUT=$($1 "test_binaries/div_ng_2.bin")
 if test $? = 254
 then
     echo "div_ng_2.bin, DIV, PASS, Drakvor (Garham Amos Kwon), division successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -67,7 +67,7 @@ else
     echo "div_ng_2.bin, DIV, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/div_rm.bin")
+OUTPUT=$($1 "test_binaries/div_rm.bin")
 if test $? = 2
 then
     echo "div_rm.bin, DIV, PASS, Drakvor (Garham Amos Kwon), division successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -75,7 +75,7 @@ else
     echo "div_rm.bin, DIV, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/sltu_bt.bin")
+OUTPUT=$($1 "test_binaries/sltu_bt.bin")
 if test $? = 1
 then
     echo "sltu_bt.bin, SLTU, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -83,7 +83,7 @@ else
     echo "sltu_bt.bin, SLTU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/sll_ov.bin")
+OUTPUT=$($1 "test_binaries/sll_ov.bin")
 if test $? = 0
 then
     echo "sll_ov.bin, SLL, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -91,7 +91,7 @@ else
     echo "sll_ov.bin, SLL, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/addiu_ng.bin")
+OUTPUT=$($1 "test_binaries/addiu_ng.bin")
 if test $? = 0
 then
     echo "addiu_ng.bin, ADDIU, PASS, Drakvor (Garham Amos Kwon), addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -99,7 +99,7 @@ else
     echo "addiu_ng.bin, ADDIU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/div_zr.bin")
+OUTPUT=$($1 "test_binaries/div_zr.bin")
 if test $? = 0
 then
     echo "div_zr.bin, ADDIU, PASS, Drakvor (Garham Amos Kwon), division successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -107,7 +107,7 @@ else
     echo "div_zr.bin, ADDIU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/srav_lg.bin")
+OUTPUT=$($1 "test_binaries/srav_lg.bin")
 if test $? = 255
 then
     echo "srav_lg.bin, ADDIU, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -115,7 +115,7 @@ else
     echo "srav_lg.bin, ADDIU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/add_nj.bin")
+OUTPUT=$($1 "test_binaries/add_nj.bin")
 if test $? = 246
 then
     echo "add_nj.bin, ADDIU, PASS, Drakvor (Garham Amos Kwon), Integer Overflow Exception, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -124,7 +124,7 @@ else
 fi
 
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/add_bt.bin")
+OUTPUT=$($1 "test_binaries/add_bt.bin")
 if test $? = 3
 then
     echo "add_bt.bin, ADD, PASS, Drakvor (Garham Amos Kwon), addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -132,7 +132,7 @@ else
     echo "add_bt.bin, ADD, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/add_ov.bin")
+OUTPUT=$($1 "test_binaries/add_ov.bin")
 if test $? = 246
 then
     echo "add_ov.bin, ADD, PASS, Drakvor (Garham Amos Kwon), Integer Overflow Exception, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -140,7 +140,7 @@ else
     echo "add_ov.bin, ADD, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/addi_bt.bin")
+OUTPUT=$($1 "test_binaries/addi_bt.bin")
 if test $? = 2
 then
     echo "addi_bt.bin, ADDI, PASS, Drakvor (Garham Amos Kwon), addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -148,7 +148,7 @@ else
     echo "addi_bt.bin, ADDI, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/addi_ov.bin")
+OUTPUT=$($1 "test_binaries/addi_ov.bin")
 if test $? = 246
 then
     echo "addi_ov.bin, ADDI, PASS, Drakvor (Garham Amos Kwon), Integer Overflow Exception, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -156,7 +156,7 @@ else
     echo "addi_ov.bin, ADDI, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/addiu_bt.bin")
+OUTPUT=$($1 "test_binaries/addiu_bt.bin")
 if test $? = 10
 then
     echo "addiu_bt.bin, ADDIU, PASS, Drakvor (Garham Amos Kwon), addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -164,7 +164,7 @@ else
     echo "addiu_bt.bin, ADDIU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/addu_bt.bin")
+OUTPUT=$($1 "test_binaries/addu_bt.bin")
 if test $? = 5
 then
     echo "addu_bt.bin, ADDU, PASS, Drakvor (Garham Amos Kwon), addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -172,7 +172,7 @@ else
     echo "addu_bt.bin, ADDU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/and_bt.bin")
+OUTPUT=$($1 "test_binaries/and_bt.bin")
 if test $? = 170
 then
     echo "and_bt.bin, AND, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -180,7 +180,7 @@ else
     echo "and_bt.bin, AND, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/andi_bt.bin")
+OUTPUT=$($1 "test_binaries/andi_bt.bin")
 if test $? = 170
 then
     echo "andi_bt.bin, ANDI, PASS, Drakvor (Garham Amos Kwon), addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -188,7 +188,7 @@ else
     echo "andi_bt.bin, ANDI, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/or_bt.bin")
+OUTPUT=$($1 "test_binaries/or_bt.bin")
 if test $? = 170
 then
     echo "or_bt.bin, OR, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -196,7 +196,7 @@ else
     echo "or_bt.bin, OR, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/ori_bt.bin")
+OUTPUT=$($1 "test_binaries/ori_bt.bin")
 if test $? = 170
 then
     echo "ori_bt.bin, ORI, PASS, Drakvor (Garham Amos Kwon), addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -204,7 +204,7 @@ else
     echo "ori_bt.bin, ORI, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/xor_bt.bin")
+OUTPUT=$($1 "test_binaries/xor_bt.bin")
 if test $? = 85
 then
     echo "xor_bt.bin, XOR, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -212,7 +212,7 @@ else
     echo "xor_bt.bin, XOR, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/xori_bt.bin")
+OUTPUT=$($1 "test_binaries/xori_bt.bin")
 if test $? = 170
 then
     echo "xori_bt.bin, XORI, PASS, Drakvor (Garham Amos Kwon), addition successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -220,7 +220,7 @@ else
     echo "xori_bt.bin, XORI, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/sub_bt.bin")
+OUTPUT=$($1 "test_binaries/sub_bt.bin")
 if test $? = 3
 then
     echo "sub_bt.bin, SUB, PASS, Drakvor (Garham Amos Kwon), subtraction successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -228,7 +228,7 @@ else
     echo "sub_bt.bin, SUB, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/sub_ov.bin")
+OUTPUT=$($1 "test_binaries/sub_ov.bin")
 if test $? = 246
 then
     echo "sub_ov.bin, SUB, PASS, Drakvor (Garham Amos Kwon), Integer Overflow Exception, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -236,7 +236,7 @@ else
     echo "sub_ov.bin, SUB, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/subu_bt.bin")
+OUTPUT=$($1 "test_binaries/subu_bt.bin")
 if test $? = 3
 then
     echo "subu_bt.bin, SUBU, PASS, Drakvor (Garham Amos Kwon), subtraction successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -244,7 +244,7 @@ else
     echo "subu_bt.bin, SUBU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/sll_bt.bin")
+OUTPUT=$($1 "test_binaries/sll_bt.bin")
 if test $? = 2
 then
     echo "sll_bt.bin, SLL, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -252,7 +252,7 @@ else
     echo "sll_bt.bin, SLL, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/sllv_bt.bin")
+OUTPUT=$($1 "test_binaries/sllv_bt.bin")
 if test $? = 8
 then
     echo "sllv_bt.bin, SLLV, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -260,7 +260,7 @@ else
     echo "sllv_bt.bin, SLLV, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/sra_bt.bin")
+OUTPUT=$($1 "test_binaries/sra_bt.bin")
 if test $? = 255
 then
     echo "sra_bt.bin, SRA, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -268,7 +268,7 @@ else
     echo "sra_bt.bin, SRA, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/srav_bt.bin")
+OUTPUT=$($1 "test_binaries/srav_bt.bin")
 if test $? = 255
 then
     echo "srav_bt.bin, SRAV, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -276,7 +276,7 @@ else
     echo "srav_bt.bin, SRAV, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/srl_bt.bin")
+OUTPUT=$($1 "test_binaries/srl_bt.bin")
 if test $? = 2
 then
     echo "srl_bt.bin, SRL, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -284,7 +284,7 @@ else
     echo "srl_bt.bin, SRL, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/srlv_bt.bin")
+OUTPUT=$($1 "test_binaries/srlv_bt.bin")
 if test $? = 1
 then
     echo "srlv_bt.bin, SRLV, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -292,7 +292,7 @@ else
     echo "srlv_bt.bin, SRLV, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/slt_bt.bin")
+OUTPUT=$($1 "test_binaries/slt_bt.bin")
 if test $? = 1
 then
     echo "slt_bt.bin, SLT, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -300,7 +300,7 @@ else
     echo "slt_bt.bin, SLT, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/slti_bt.bin")
+OUTPUT=$($1 "test_binaries/slti_bt.bin")
 if test $? = 1
 then
     echo "slti_bt.bin, SLTI, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -308,7 +308,7 @@ else
     echo "slti_bt.bin, SLTI, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/sltiu_bt.bin")
+OUTPUT=$($1 "test_binaries/sltiu_bt.bin")
 if test $? = 1
 then
     echo "sltiu_bt.bin, SLTIU, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -316,7 +316,7 @@ else
     echo "sltiu_bt.bin, SLTIU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/sltiu_ng.bin")
+OUTPUT=$($1 "test_binaries/sltiu_ng.bin")
 if test $? = 1
 then
     echo "sltiu_ng.bin, SLTIU, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -324,7 +324,7 @@ else
     echo "sltiu_ng.bin, SLTIU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/mthi_mfhi_bt.bin")
+OUTPUT=$($1 "test_binaries/mthi_mfhi_bt.bin")
 if test $? = 2
 then
     echo "mthi_mfhi_bt.bin, MTHI/MFHI, PASS, Drakvor (Garham Amos Kwon), operations successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -332,7 +332,7 @@ else
     echo "mthi_mfhi_bt.bin, MTHI/MFHI, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/mtlo_mflo_bt.bin")
+OUTPUT=$($1 "test_binaries/mtlo_mflo_bt.bin")
 if test $? = 7
 then
     echo "mtlo_mflo_bt.bin, MTLO/MFLO, PASS, Drakvor (Garham Amos Kwon), operations successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -341,7 +341,7 @@ else
 fi
 
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/harsh_r0_test.bin")
+OUTPUT=$($1 "test_binaries/harsh_r0_test.bin")
 if test $? = 1
 then
     echo "harsh_r0_test.bin, N/A, PASS, Silvertrousers (Cyrus Goodarzi), r0 remains unmodified as it should, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -351,7 +351,7 @@ then
 else
     echo "harsh_r0_test.bin, N/A, FAIL, Silvertrousers (Cyrus Goodarzi), No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/bgez_bt.bin")
+OUTPUT=$($1 "test_binaries/bgez_bt.bin")
 if test $? = 1
 then
     echo "bgez_bt.bin, BGEZ, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -364,14 +364,14 @@ then
 else
     echo "bgez_bt.bin, BGEZ, FAIL, Silvertrousers (Cyrus Goodarzi), No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/bgez_illegal_back.bin")
+OUTPUT=$($1 "test_binaries/bgez_illegal_back.bin")
 if test $? = 245
 then
     echo "bgez_illegal_back, BGEZ, PASS, Silvertrousers (Cyrus Goodarzi), ----, "  | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "bgez_illegal_back, BGEZ, FAIL, Silvertrousers (Cyrus Goodarzi), didnt return the correct error, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/bgezal_bt.bin")
+OUTPUT=$($1 "test_binaries/bgezal_bt.bin")
 if test $? = 2
 then
     echo "bgezal_bt.bin, BGEZAL, PASS, Silvertrousers (Cyrus Goodarzi), branch returned to correct place " | paste -sd ' ' >> ./test/output/"$dt"
@@ -381,7 +381,7 @@ then
 else
     echo "bgezal_bt.bin, BGEZAL, FAIL, Silvertrousers (Cyrus Goodarzi), No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/beq_bt.bin")
+OUTPUT=$($1 "test_binaries/beq_bt.bin")
 if test $? = 1
 then
     echo "beq_bt.bin, BEQ, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -394,14 +394,14 @@ then
 else
     echo "beq_bt.bin, BEQ, FAIL, Silvertrousers (Cyrus Goodarzi), No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/beq_illegal_back.bin")
+OUTPUT=$($1 "test_binaries/beq_illegal_back.bin")
 if test $? = 245
 then
     echo "beq_illegal_back, BEQ, PASS, Silvertrousers (Cyrus Goodarzi), ----, "  | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "beq_illegal_back, BEQ, FAIL, Silvertrousers (Cyrus Goodarzi), didnt return the correct error, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/bgtz_bt.bin")
+OUTPUT=$($1 "test_binaries/bgtz_bt.bin")
 if test $? = 1
 then
     echo "bgtz_bt.bin, BGTZ, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -414,14 +414,14 @@ then
 else
     echo "bgtz_bt.bin, BGTZ, FAIL, Silvertrousers (Cyrus Goodarzi), No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/bgtz_illegal_back.bin")
+OUTPUT=$($1 "test_binaries/bgtz_illegal_back.bin")
 if test $? = 245
 then
     echo "bgtz_illegal_back, BGTZ, PASS, Silvertrousers (Cyrus Goodarzi), ----, "  | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "bgtz_illegal_back, BGTZ, FAIL, Silvertrousers (Cyrus Goodarzi), didnt return the correct error, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/blez_bt.bin")
+OUTPUT=$($1 "test_binaries/blez_bt.bin")
 if test $? = 1
 then
     echo "blez_bt.bin, BLEZ, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -434,14 +434,14 @@ then
 else
     echo "blez_bt.bin, BLEZ, FAIL, Silvertrousers (Cyrus Goodarzi), No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/blez_illegal_back.bin")
+OUTPUT=$($1 "test_binaries/blez_illegal_back.bin")
 if test $? = 245
 then
     echo "blez_illegal_back, BLEZ, PASS, Silvertrousers (Cyrus Goodarzi), ----, "  | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "blez_illegal_back, BLEZ, FAIL, Silvertrousers (Cyrus Goodarzi), didnt return the correct error, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/bltz_bt.bin")
+OUTPUT=$($1 "test_binaries/bltz_bt.bin")
 if test $? = 1
 then
     echo "bltz_bt.bin, BLTZ, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -454,14 +454,14 @@ then
 else
     echo "bltz_bt.bin, BLTZ, FAIL, Silvertrousers (Cyrus Goodarzi), No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/bltz_illegal_back.bin")
+OUTPUT=$($1 "test_binaries/bltz_illegal_back.bin")
 if test $? = 245
 then
     echo "bltz_illegal_back, BLTZ, PASS, Silvertrousers (Cyrus Goodarzi), ----, "  | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "bltz_illegal_back, BLTZ, FAIL, Silvertrousers (Cyrus Goodarzi), didnt return the correct error, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/bltzal_bt.bin")
+OUTPUT=$($1 "test_binaries/bltzal_bt.bin")
 if test $? = 2
 then
     echo "bltzal_bt.bin, BLTZAL, PASS, Silvertrousers (Cyrus Goodarzi), branch returned to correct place " | paste -sd ' ' >> ./test/output/"$dt"
@@ -471,7 +471,7 @@ then
 else
     echo "bltzal_bt.bin, BLTZAL, FAIL, Silvertrousers (Cyrus Goodarzi), No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/bne_bt.bin")
+OUTPUT=$($1 "test_binaries/bne_bt.bin")
 if test $? = 1
 then
     echo "bne_bt.bin, BNE, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -484,7 +484,7 @@ then
 else
     echo "bne_bt.bin, BNE, FAIL, Silvertrousers (Cyrus Goodarzi), No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/j_ds.bin")
+OUTPUT=$($1 "test_binaries/j_ds.bin")
 if test $? = 1
 then
     echo "j_ds.bin, J, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -494,7 +494,7 @@ then
 else
     echo "j_ds.bin, J, FAIL, Silvertrousers (Cyrus Goodarzi), No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/jal_bt.bin")
+OUTPUT=$($1 "test_binaries/jal_bt.bin")
 if test $? = 3
 then
     echo "jal_bt.bin, JAL, PASS, Silvertrousers (Cyrus Goodarzi), link returns to correct place, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -508,7 +508,7 @@ else
     echo "jal_bt.bin, JAL, FAIL, Silvertrousers (Cyrus Goodarzi), not sure hats wrong here, " | paste -sd ' ' >> ./test/output/"$dt"
 
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/jalr_bt.bin")
+OUTPUT=$($1 "test_binaries/jalr_bt.bin")
 if test $? = 3
 then
     echo "jalr_bt.bin, JALR, PASS, Silvertrousers (Cyrus Goodarzi), link returns to correct place, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -523,14 +523,14 @@ else
     echo "jalr_bt.bin, JALR, FAIL, Silvertrousers (Cyrus Goodarzi), not sure hats wrong here, " | paste -sd ' ' >> ./test/output/"$dt"
 
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/jr_bt.bin")
+OUTPUT=$($1 "test_binaries/jr_bt.bin")
 if test $? = 0
 then
     echo "jr_bt.bin, JR, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "jr_bt.bin, JR, FAIL, Silvertrousers (Cyrus Goodarzi), No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/j_bt.bin")
+OUTPUT=$($1 "test_binaries/j_bt.bin")
 if test $? = 0
 then
     echo "j_bt.bin, J, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -540,7 +540,7 @@ then
 else
     echo "j_bt.bin, J, FAIL, Silvertrousers (Cyrus Goodarzi), No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lbu_bt.bin")
+OUTPUT=$($1 "test_binaries/lbu_bt.bin")
 if test $? = 16
 then
     echo "lbu_bt.bin, LBU, PASS, Silvertrousers (Cyrus Goodarzi), loads correct byte without sign extension, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -550,14 +550,14 @@ then
 else
     echo "lbu_bt.bin, LBU, FAIL, Silvertrousers (Cyrus Goodarzi), loads wrong byte, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lbu_ov.bin")
+OUTPUT=$($1 "test_binaries/lbu_ov.bin")
 if test $? = 245
 then
     echo "lbu_ov.bin, LBU, PASS, Silvertrousers (Cyrus Goodarzi), catces out of range memory loading, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lbu_ov.bin, LBU, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't catch trying to load out of range mem, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lb_bt.bin")
+OUTPUT=$($1 "test_binaries/lb_bt.bin")
 echo $?
 if test $? = 240
 then
@@ -568,28 +568,28 @@ then
 else
     echo "lb_bt.bin, LB, FAIL, Silvertrousers (Cyrus Goodarzi), loads wrong byte, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lb_ov.bin")
+OUTPUT=$($1 "test_binaries/lb_ov.bin")
 if test $? = 245
 then
     echo "lb_ov.bin, LB, PASS, Silvertrousers (Cyrus Goodarzi), catces out of range memory loading, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lb_ov.bin, LB, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't catch trying to load out of range mem, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(echo á | ./bin/mips_simulator "test_binaries/lb_i.bin")
+OUTPUT=$(echo á | $1 "test_binaries/lb_i.bin")
 if test $? = 1
 then
     echo "lb_i.bin, LB, PASS, Silvertrousers (Cyrus Goodarzi), takes user input correctly, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lb_i.bin, LB, FAIL, Silvertrousers (Cyrus Goodarzi), didnt take user input correctly, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(echo á | ./bin/mips_simulator "test_binaries/lb_i_zero.bin")
+OUTPUT=$(echo á | $1 "test_binaries/lb_i_zero.bin")
 if test $? = 0
 then
     echo "lb_i_zero.bin, LB, PASS, Silvertrousers (Cyrus Goodarzi), takes user input correctly and only loads lsB of the mem word, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lb_i_zero.bin, LB, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't only load from lsB of mem word, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lhu_bt.bin")
+OUTPUT=$($1 "test_binaries/lhu_bt.bin")
 if test $? = 16
 then
     echo "lhu_bt.bin, LHU, PASS, Silvertrousers (Cyrus Goodarzi), loads correct byte without sign extension, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -599,21 +599,21 @@ then
 else
     echo "lhu_bt.bin, LHU, FAIL, Silvertrousers (Cyrus Goodarzi), loads wrong byte, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lhu_unaligned.bin")
+OUTPUT=$($1 "test_binaries/lhu_unaligned.bin")
 if test $? = 245
 then
     echo "lhu_unaligned.bin, LHU, PASS, Silvertrousers (Cyrus Goodarzi), detects unaligned address correctly, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lhu_unaligned.bin, LHU, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't catch unaligned sequence, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lhu_ov.bin")
+OUTPUT=$($1 "test_binaries/lhu_ov.bin")
 if test $? = 245
 then
     echo "lhu_ov.bin, LHU, PASS, Silvertrousers (Cyrus Goodarzi), catces out of range memory loading, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lhu_ov.bin, LHU, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't catch trying to load out of range mem, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lh_bt.bin")
+OUTPUT=$($1 "test_binaries/lh_bt.bin")
 if test $? = 240
 then
     echo "lh_bt.bin, LH, PASS, Silvertrousers (Cyrus Goodarzi), loads correct byte with sign extension, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -623,14 +623,14 @@ then
 else
     echo "lh_bt.bin, LHU, FAIL, Silvertrousers (Cyrus Goodarzi), loads wrong byte, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lh_unaligned.bin")
+OUTPUT=$($1 "test_binaries/lh_unaligned.bin")
 if test $? = 245
 then
     echo "lh_unaligned.bin, LH, PASS, Silvertrousers (Cyrus Goodarzi), detects unaligned address correctly, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lh_unaligned.bin, LH, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't catch unaligned sequence, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lh_ov.bin")
+OUTPUT=$($1 "test_binaries/lh_ov.bin")
 if test $? = 245
 then
     echo "lh_ov.bin, LH, PASS, Silvertrousers (Cyrus Goodarzi), catces out of range memory loading, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -638,49 +638,49 @@ else
     echo "lh_ov.bin, LH, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't catch trying to load out of range mem, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/lui_bt.bin")
+OUTPUT=$($1 "test_binaries/lui_bt.bin")
 if test $? = 1
 then
     echo "lui_bt.bin, LUI, PASS, Silvertrousers (Cyrus Goodarzi), loads correct immediate, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lui_bt.bin, LUI, FAIL, Silvertrousers (Cyrus Goodarzi), No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lw_byte_0.bin")
+OUTPUT=$($1 "test_binaries/lw_byte_0.bin")
 if test $? = 64
 then
     echo "lw_byte_0.bin, LW, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lw_byte_0.bin, LW, FAIL, Silvertrousers (Cyrus Goodarzi), LSB of word was incorrect when loaded, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lw_byte_1.bin")
+OUTPUT=$($1 "test_binaries/lw_byte_1.bin")
 if test $? = 48
 then
     echo "lw_byte_1.bin, LW, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lw_byte_1.bin, LW, FAIL, Silvertrousers (Cyrus Goodarzi), B1 of word was incorrect when loaded, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lw_byte_2.bin")
+OUTPUT=$($1 "test_binaries/lw_byte_2.bin")
 if test $? = 32
 then
     echo "lw_byte_2.bin, LW, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lw_byte_2.bin, LW, FAIL, Silvertrousers (Cyrus Goodarzi), LSB of word was incorrect when loaded, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lw_byte_3.bin")
+OUTPUT=$($1 "test_binaries/lw_byte_3.bin")
 if test $? = 16
 then
     echo "lw_byte_3.bin, LW, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lw_byte_3.bin, LW, FAIL, Silvertrousers (Cyrus Goodarzi), MSB of word was incorrect when loaded, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lw_unaligned.bin")
+OUTPUT=$($1 "test_binaries/lw_unaligned.bin")
 if test $? = 245
 then
     echo "lw_unaligned.bin, LW, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lw_unaligned.bin, LW, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't stop loading of words at unaligned addresses, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lw_ov.bin")
+OUTPUT=$($1 "test_binaries/lw_ov.bin")
 if test $? = 245
 then
     echo "lw_ov.bin, LW, PASS, Silvertrousers (Cyrus Goodarzi), catces out of range memory loading, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -688,28 +688,28 @@ else
     echo "lw_ov.bin, LW, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't catch trying to load out of range mem, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/lwl0_bt.bin")
+OUTPUT=$($1 "test_binaries/lwl0_bt.bin")
 if test $? = 4
 then
     echo "lwl0_bt.bin, LWL, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lwl0_bt.bin, LWL, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lwl1_bt.bin")
+OUTPUT=$($1 "test_binaries/lwl1_bt.bin")
 if test $? = 4
 then
     echo "lwl1_bt.bin, LWL, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lwl1_bt.bin, LWL, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lwl2_bt.bin")
+OUTPUT=$($1 "test_binaries/lwl2_bt.bin")
 if test $? = 4
 then
     echo "lwl2_bt.bin, LWL, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lwl2_bt.bin, LWL, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lwl3_bt.bin")
+OUTPUT=$($1 "test_binaries/lwl3_bt.bin")
 if test $? = 4
 then
     echo "lwl3_bt.bin, LWL, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -717,49 +717,49 @@ else
     echo "lwl3_bt.bin, LWL, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/lwl1_original.bin")
+OUTPUT=$($1 "test_binaries/lwl1_original.bin")
 if test $? = 8
 then
     echo "lwl1_original.bin, LWL, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lwl1_original.bin, LWL, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lwl2_original.bin")
+OUTPUT=$($1 "test_binaries/lwl2_original.bin")
 if test $? = 7
 then
     echo "lwl2_original.bin, LWL, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lwl2_original.bin, LWL, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lwl3_original.bin")
+OUTPUT=$($1 "test_binaries/lwl3_original.bin")
 if test $? = 6
 then
     echo "lwl3_original.bin, LWL, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lwl3_original.bin, LWL, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lwr0_bt.bin")
+OUTPUT=$($1 "test_binaries/lwr0_bt.bin")
 if test $? = 1
 then
     echo "lwr0_bt.bin, LWR, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lwr0_bt.bin, LWR, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lwr1_bt.bin")
+OUTPUT=$($1 "test_binaries/lwr1_bt.bin")
 if test $? = 1
 then
     echo "lwr1_bt.bin, LWR, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lwr1_bt.bin, LWR, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lwr2_bt.bin")
+OUTPUT=$($1 "test_binaries/lwr2_bt.bin")
 if test $? = 1
 then
     echo "lwr2_bt.bin, LWR, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lwr2_bt.bin, LWR, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lwr3_bt.bin")
+OUTPUT=$($1 "test_binaries/lwr3_bt.bin")
 if test $? = 1
 then
     echo "lwr3_bt.bin, LWR, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -767,21 +767,21 @@ else
     echo "lwr3_bt.bin, LWR, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/lwr0_original.bin")
+OUTPUT=$($1 "test_binaries/lwr0_original.bin")
 if test $? = 7
 then
     echo "lwr0_original.bin, LWR, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lwr0_original.bin, LWR, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lwr1_original.bin")
+OUTPUT=$($1 "test_binaries/lwr1_original.bin")
 if test $? = 6
 then
     echo "lwr1_original.bin, LWR, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lwr1_original.bin, LWR, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lwr2_original.bin")
+OUTPUT=$($1 "test_binaries/lwr2_original.bin")
 if test $? = 5
 then
     echo "lwr2_original.bin, LWR, PASS, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -790,7 +790,7 @@ else
 fi
 
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/sb_bt.bin")
+OUTPUT=$($1 "test_binaries/sb_bt.bin")
 if test $? = 64
 then
     echo "sb_bt.bin, SB, PASS, Silvertrousers (Cyrus Goodarzi), stores right part of word and puts it in the right place in mem, " | paste -sd ' ' >> ./test/output/"$dt"
@@ -801,56 +801,56 @@ else
     echo "sb_bt.bin, SB, FAIL, Silvertrousers (Cyrus Goodarzi), stores wrong part of the word and/or put it in wrong place in mem, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
-OUTPUT=$(./bin/mips_simulator "test_binaries/sb_ov.bin")
+OUTPUT=$($1 "test_binaries/sb_ov.bin")
 if test $? = 245
 then
     echo "sb_ov.bin, SB, PASS, Silvertrousers (Cyrus Goodarzi), catches storing to wrong mem, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "sb_ov.bin, SB, FAIL, Silvertrousers (Cyrus Goodarzi), not sure why it wrong sorry, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/sb_instr.bin")
+OUTPUT=$($1 "test_binaries/sb_instr.bin")
 if test $? = 245
 then
     echo "sb_instr.bin, SB, PASS, Silvertrousers (Cyrus Goodarzi), catches writing to instruction mem, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "sb_instr.bin, SB, FAIL, Silvertrousers (Cyrus Goodarzi), not sure why it wrong sorry, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/sh_hw0.bin")
+OUTPUT=$($1 "test_binaries/sh_hw0.bin")
 if test $? = 34
 then
     echo "sh_hw0.bin, SH, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "sh_hw0.bin, SH, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/sh_hw1.bin")
+OUTPUT=$($1 "test_binaries/sh_hw1.bin")
 if test $? = 34
 then
     echo "sh_hw1.bin, SH, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "sh_hw1.bin, SH, FAIL, Silvertrousers (Cyrus Goodarzi), ------, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/sh_ov.bin")
+OUTPUT=$($1 "test_binaries/sh_ov.bin")
 if test $? = 245
 then
     echo "sh_ov.bin, SH, PASS, Silvertrousers (Cyrus Goodarzi), catces out of range memory loading, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "sh_ov.bin, SH, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't catch trying to load out of range mem, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/lw_sw_bt.bin")
+OUTPUT=$($1 "test_binaries/lw_sw_bt.bin")
 if test $? = 0
 then
     echo "lw_sw_bt.bin, SW, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "lw_sw_bt.bin, SW, FAIL, Silvertrousers (Cyrus Goodarzi), No idea why it failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/sw_unaligned.bin")
+OUTPUT=$($1 "test_binaries/sw_unaligned.bin")
 if test $? = 245
 then
     echo "sw_unaligned.bin, SW, PASS, Silvertrousers (Cyrus Goodarzi), ----, " | paste -sd ' ' >> ./test/output/"$dt"
 else
     echo "sw_unaligned.bin, SW, FAIL, Silvertrousers (Cyrus Goodarzi), doesn't stop loading of words at unaligned addresses, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
-OUTPUT=$(./bin/mips_simulator "test_binaries/sw_ov.bin")
+OUTPUT=$($1 "test_binaries/sw_ov.bin")
 if test $? = 245
 then
     echo "sw_ov.bin, SW, PASS, Silvertrousers (Cyrus Goodarzi), catches out of range memory loading, " | paste -sd ' ' >> ./test/output/"$dt"
