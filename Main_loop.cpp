@@ -36,9 +36,15 @@ int main(int argc, char *argv[] ){
     s.registers[0] = 0;//makes sure r0 is always 0
     s.pc += 4;
     if(s.pc != 0){
-      if((0x10000000 <= s.pc) && (s.pc <= last_instr_addr)){//checks if pc is looking at correct memory location
-        inst = instruction(word_conc(s, s.pc)); //look at the instruction at the memory location indicaated by pc
-        inst_delay_slot = instruction(word_conc(s, s.pc + 4));
+      if((0x10000000 <= s.pc) && (s.pc <= 0x11000000)){//checks if pc is looking at correct memory location
+        if(last_instr_addr < s.pc){
+          inst = 0; //look at the instruction at the memory location indicaated by pc
+          inst_delay_slot = 0;
+        }
+        else{
+          inst = instruction(word_conc(s, s.pc)); //look at the instruction at the memory location indicaated by pc
+          inst_delay_slot = instruction(word_conc(s, s.pc + 4));
+        }
         if(print){
           std::cerr<<"pc: "<<std::hex<<(s.pc)<<", instruction word: "<<std::hex<<word_conc(s, s.pc)<<std::endl;
         }
