@@ -15,7 +15,9 @@ Main_loop.o: Main_loop.cpp
 
 testbench:
 	chmod u+x bin/mips_testbench
-	./bin/mips_testbench
+	
+run_testbench:
+	./bin/mips_testbench bin/mips_simulator
 
 clean:
 	rm *.o bin/mips_simulator
