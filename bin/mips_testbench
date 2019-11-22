@@ -845,8 +845,8 @@ fi
 OUTPUT=$($1 "test_binaries/bin_bcd_test.bin")
 if test $? = 81
 then
-    echo "bin_bcd_test.bin, SW, PASS, Drakvor (Garham Amos Kwon), binary to bcd conversion success" | paste -sd ' ' >> ./test/output/"$dt"
+    echo "bin_bcd_test.bin, Various, PASS, Drakvor (Garham Amos Kwon), binary to bcd conversion success" | paste -sd ' ' >> ./test/output/"$dt"
 else
-    echo "bin_bcd_test.bin, SW, FAIL, Drakvor (Garham Amos Kwon), binary to bcd conversion failed" | paste -sd ' ' >> ./test/output/"$dt"
+    echo "bin_bcd_test.bin, Various, FAIL, Drakvor (Garham Amos Kwon), binary to bcd conversion failed" | paste -sd ' ' >> ./test/output/"$dt"
 fi
 cat ./test/output/"$dt"
