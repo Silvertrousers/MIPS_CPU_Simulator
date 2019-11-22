@@ -1,16 +1,7 @@
 #!/bin/bash
 dt="_$(date +%d.%m.%Y_%H:%M:%S).txt"
 touch ./test/output/"$dt"
-OUTPUT=$($1 "test_binaries/r0_test.bin")
-if test $? = 1
-then
-    echo "r0_test.bin, N/A, PASS, Drakvor (Garham Amos Kwon), r0 remains unmodified as it should" | paste -sd ' ' >> ./test/output/"$dt"
-elif test $? = 6
-then
-    echo "r0_test.bin, N/A, FAIL, Drakvor (Garham Amos Kwon), r0 was modified to 5" | paste -sd ' ' >> ./test/output/"$dt"
-else
-    echo "r0_test.bin, N/A, FAIL, Drakvor (Garham Amos Kwon), operation failed" | paste -sd ' ' >> ./test/output/"$dt"
-fi
+
 OUTPUT=$($1 "test_binaries/invalid.bin")
 if test $? = 244
 then
