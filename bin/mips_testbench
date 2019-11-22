@@ -316,6 +316,14 @@ else
     echo "sltiu_bt.bin, SLTIU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
+OUTPUT=$(./bin/mips_simulator "test_binaries/sltiu_ng.bin")
+if test $? = 1
+then
+    echo "sltiu_ng.bin, SLTIU, PASS, Drakvor (Garham Amos Kwon), operation successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+else
+    echo "sltiu_ng.bin, SLTIU, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+fi
+
 OUTPUT=$(./bin/mips_simulator "test_binaries/mthi_mfhi_bt.bin")
 if test $? = 2
 then
