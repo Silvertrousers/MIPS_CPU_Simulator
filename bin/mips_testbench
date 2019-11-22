@@ -32,7 +32,7 @@ if test $? = 254
 then
     echo "div_ng_1.bin, DIV, PASS, Drakvor (Garham Amos Kwon), division successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
 else
-    echo "div_ng_2.bin, DIV, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+    echo "div_ng_1.bin, DIV, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
 OUTPUT=$(./bin/mips_simulator "test_binaries/div_ng_2.bin")
