@@ -2,13 +2,6 @@
 dt="_$(date +%d.%m.%Y_%H:%M:%S).txt"
 touch ./test/output/"$dt"
 
-OUTPUT=$($1 "test_binaries/invalid.bin")
-if test $? = 244
-then
-    echo "invalid.bin, N/A, PASS, Drakvor (Garham Amos Kwon), Invalid Instruction Exception" | paste -sd ' ' >> ./test/output/"$dt"
-else
-    echo "invalid.bin, N/A, FAIL, Drakvor (Garham Amos Kwon), operation failed" | paste -sd ' ' >> ./test/output/"$dt"
-fi
 
 OUTPUT=$($1 "test_binaries/mult_bt.bin")
 if test $? = 6
