@@ -20,11 +20,11 @@ else
 fi
 
 OUTPUT=$(./bin/mips_simulator "test_binaries/mult_lg.bin")
-if test $? = 16
+if test $? = 255
 then
-    echo "mult_ng.bin, MULT, PASS, Drakvor (Garham Amos Kwon), multiplication successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
+    echo "mult_lg.bin, MULT, PASS, Drakvor (Garham Amos Kwon), multiplication successfully performed, " | paste -sd ' ' >> ./test/output/"$dt"
 else
-    echo "mult_ng.bin, MULT, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
+    echo "mult_lg.bin, MULT, FAIL, Drakvor (Garham Amos Kwon), operation failed, " | paste -sd ' ' >> ./test/output/"$dt"
 fi
 
 OUTPUT=$(./bin/mips_simulator "test_binaries/div_ng_1.bin")
